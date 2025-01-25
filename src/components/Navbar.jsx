@@ -12,9 +12,9 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import AdbIcon from '@mui/icons-material/Adb';
 
-const pages = ['Cart', 'Counter', 'Dishes'];  // Page names for navigation
+
+const pages = ['Cart', 'Counters', 'Dishes']; 
 const settings = ['Profile', 'Logout'];
 
 function Navbar() {
@@ -40,8 +40,6 @@ function Navbar() {
     <AppBar position="static" sx={{ backgroundColor: '#EB9486' }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-
-          {/* Mobile Menu for small screen */}
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
               size="large"
@@ -69,11 +67,9 @@ function Navbar() {
               onClose={handleCloseNavMenu}
               sx={{ display: { xs: 'block', md: 'none' } }}
             >
-              {/* Link each page */}
               {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
                   <Typography sx={{ textAlign: 'center', color: 'black' }}>
-                    {/* Link to page dynamically */}
                     <Link to={`/${page.toLowerCase()}`} style={{ textDecoration: 'none', color: 'black' }}>
                       {page}
                     </Link>
@@ -82,29 +78,6 @@ function Navbar() {
               ))}
             </Menu>
           </Box>
-
-          {/* Logo for small screens */}
-          <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
-          <Typography
-            variant="h5"
-            noWrap
-            component="a"
-            href="#app-bar-with-responsive-menu"
-            sx={{
-              mr: 2,
-              display: { xs: 'flex', md: 'none' },
-              flexGrow: 1,
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'black',
-              textDecoration: 'none',
-            }}
-          >
-            LOGO
-          </Typography>
-
-          {/* Navbar for larger screens */}
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
               <Button
@@ -112,15 +85,12 @@ function Navbar() {
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: 'black', display: 'block' }}
               >
-                {/* Link to page dynamically */}
                 <Link to={`/${page.toLowerCase()}`} style={{ textDecoration: 'none', color: 'black' }}>
                   {page}
                 </Link>
               </Button>
             ))}
           </Box>
-
-          {/* User Avatar and settings */}
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
