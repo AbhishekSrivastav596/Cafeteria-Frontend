@@ -5,16 +5,16 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/autoplay";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
-import image1 from "../assets/food1.jpg";
-import image2 from "../assets/food2.jpg";
-import image3 from "../assets/food3.jpg";
-import image4 from "../assets/food4.jpg";
+import image1 from '../assets/image1.jpg'
+import image2 from '../assets/image2.jpeg'
+import image3 from '../assets/image3.jpeg'
+import image4 from "../assets/sushiimage.jpg"
 
 const Carousel = () => {
   const images = [image1, image2, image3, image4];
 
   return (
-<div className="carousel-container w-full max-w-8xl mx-auto">
+<div className="carousel-container w-full max-w-8xl mx-auto object-contain">
   <Swiper
     modules={[Navigation, Pagination, Autoplay]}
     navigation

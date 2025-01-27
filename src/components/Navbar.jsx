@@ -14,7 +14,7 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 
 
-const pages = ['Cart', 'Counters', 'Dishes']; 
+const pages = [ 'Dishes','Counters','Cart']; 
 const settings = ['Profile', 'Logout'];
 
 function Navbar() {
