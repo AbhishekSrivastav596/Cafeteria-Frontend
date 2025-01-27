@@ -3,7 +3,18 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchDishes } from "../slices/DishSlice";
 import { addDishes } from "../slices/DishSlice";
 import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css"; 
+import "react-toastify/dist/ReactToastify.css";
+import pastaImage from "../assets/pasta.png";
+import burgerImage from "../assets/burger.png";
+import pizzaImage from "../assets/pizza.png";
+import saladImage from "../assets/salad.png";
+
+const dishImages = {
+  "Pasta Alfredo": pastaImage,
+  Burger: burgerImage,
+  Pizza: pizzaImage,
+  "Caesar Salad": saladImage,
+};
 
 function DishPage() {
   const dispatch = useDispatch();
@@ -47,13 +58,13 @@ function DishPage() {
           {dishes.map((dish) => (
             <li
               key={dish._id}
-              className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transform transition duration-300 hover:scale-105"
+              className="bg-white hover:bg-[#faf0e6] focus:ring-[#faf0e6] p-6 rounded-lg shadow-md hover:shadow-lg transform transition duration-300 hover:scale-105"
             >
               <div className="flex flex-col items-center">
                 <img
-                  src={dish.imageUrl || "/placeholder.jpg"}
+                  src={dishImages[dish.name] || "/placeholder.jpg"}
                   alt={dish.name}
-                  className="w-32 h-32 object-cover rounded-lg mb-4"
+                  className="w-full h-50 object-cover rounded-lg mb-4"
                 />
                 <h3 className="text-xl font-semibold text-gray-800 text-center">
                   {dish.name}
@@ -67,7 +78,7 @@ function DishPage() {
               </div>
               <button
                 onClick={() => handleAddToCart(dish)}
-                className="w-full mt-4 bg-blue-500 text-white py-2 px-6 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                className="w-full mt-4 bg-[#404D3C] text-white py-2 px-6 rounded-md focus:outline-none focus:ring-2 focus:ring-[#404D3C]"
               >
                 Add to Cart
               </button>
@@ -75,7 +86,7 @@ function DishPage() {
           ))}
         </ul>
       )}
-      <ToastContainer /> 
+      <ToastContainer position="top-right" autoClose={2000} />
     </div>
   );
 }

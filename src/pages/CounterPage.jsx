@@ -6,8 +6,17 @@ import {
   removeMerchant,
   deleteCounterAsync,
 } from "../slices/CounterSlice";
+import flame from "../assets/flame.png"; 
+import chai from "../assets/chai.png"; 
+import { useNavigate } from "react-router-dom";
+
+const counterImages = {
+  "Flame on": flame,
+  "Chaishh": chai,
+};
 
 function CounterPage() {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const { counters, loading, error } = useSelector((state) => state.counter);
 
@@ -25,6 +34,9 @@ function CounterPage() {
 
   const handleDeleteCounter = (counterId) => {
     dispatch(deleteCounterAsync(counterId));
+  };
+  const handleImageClick = (counterId) => {
+    navigate('/dishes');
   };
 
   if (loading)
@@ -55,20 +67,28 @@ function CounterPage() {
           {counters.map((counter) => (
             <li
               key={counter._id}
-              className="bg-white p-6 rounded-lg shadow-md flex flex-col md:flex-row justify-between items-center"
+              className="bg-white hover:bg-[#fbf7f3] focus:ring-[#faf0e6] p-6 rounded-lg shadow-md flex flex-col md:flex-row justify-between items-center"
             >
-              <div className="flex flex-col text-center md:text-left">
-                <h3 className="text-xl font-semibold text-gray-800">
-                  {counter.name}
-                </h3>
-                <p className="text-gray-600">
-                  Merchants: {counter.merchants.length}
-                </p>
+              <div className="flex flex-col md:flex-row items-center text-center md:text-left">
+                <img
+                  src={counterImages[counter.name] || "/placeholder.jpg"} 
+                  alt={counter.name}
+                  className="w-30 h-30 object-cover rounded-lg mb-4 md:mb-0 mr-4"
+                  onClick={() => handleImageClick(counter._id)}
+                />
+                <div>
+                  <h3 className="text-xl font-semibold text-gray-800">
+                    {counter.name}
+                  </h3>
+                  <p className="text-gray-600">
+                    Merchants: {counter.merchants.length}
+                  </p>
+                </div>
               </div>
               <div className="mt-4 md:mt-0 flex space-x-4">
                 <button
                   onClick={() => handleAddMerchant(counter._id, "merchantId")}
-                  className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                  className="bg-[#9ba174] text-white px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
                 >
                   Add Merchant
                 </button>
@@ -76,13 +96,13 @@ function CounterPage() {
                   onClick={() =>
                     handleRemoveMerchant(counter._id, "merchantId")
                   }
-                  className="bg-yellow-500 text-white px-4 py-2 rounded-md hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-400"
+                  className="bg-[#505e4b] text-white px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-400"
                 >
                   Remove Merchant
                 </button>
                 <button
                   onClick={() => handleDeleteCounter(counter._id)}
-                  className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-400"
+                  className="bg-[#505e4b] text-white px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-red-400"
                 >
                   Delete Counter
                 </button>
