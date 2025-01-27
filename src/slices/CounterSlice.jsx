@@ -57,7 +57,7 @@ export const fetchCounters = () => async (dispatch) => {
   try {
     const response = await axios.get('http://localhost:8080/counters');
     dispatch(fetchCountersSuccess(response.data));
-    console.log(response);
+    console.log(response.data);
     
   } catch (error) {
     dispatch(fetchCountersFailure(error.message));

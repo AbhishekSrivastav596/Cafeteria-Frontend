@@ -12,9 +12,6 @@ const cartSlice = createSlice({
     cartSuccess: (state, action) => {
       state.cartItems = action.payload.cart || [];
     },
-    addToCartSuccess: (state, action) => {
-      state.cartItems = action.payload;
-    },
     removeFromCartSuccess: (state, action) => {
       state.cartItems = action.payload;
     },
@@ -32,7 +29,6 @@ const cartSlice = createSlice({
 
 export const {
   cartSuccess,
-  addToCartSuccess,
   removeFromCartSuccess,
   increaseQuantitySuccess,
   decreaseQuantitySuccess,
@@ -48,14 +44,7 @@ export const fetchCart = () => async (dispatch) => {
   }
 };
 
-export const addToCart = (userId, dishId, quantity) => async (dispatch) => {
-  try {
-    const response = await axios.post(`http://localhost:8080/cart/add`, { userId, dishId, quantity });
-    dispatch(addToCartSuccess(response.data));
-  } catch (error) {
-    console.error(error.message);
-  }
-};
+
 
 export const removeFromCart = ( dishId) => async (dispatch) => {
   try {

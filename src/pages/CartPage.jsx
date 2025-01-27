@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   fetchCart,
-  addToCart,
   removeFromCart,
   increaseQuantity,
   decreaseQuantity,
@@ -62,44 +61,52 @@ function CartPage() {
         Clear Cart
       </button>
       <ul className="space-y-6">
-        {cartItems.map((item) => (
-          <li key={item.dish._id} className="bg-white p-6 rounded-lg shadow-md flex flex-col md:flex-row justify-between items-center">
-            <div className="flex flex-col md:flex-row items-center">
-              <img
-                src={item.dish.imageUrl || '/placeholder.jpg'}
-                alt={item.dish.name}
-                className="w-24 h-24 md:w-32 md:h-32 object-cover rounded-lg mb-4 md:mb-0"
-              />
-              <div className="ml-4 text-center md:text-left">
-                <h3 className="text-xl font-semibold text-gray-800">{item.dish.name}</h3>
-                <p className="text-gray-600">Price: ₹{item.dish.price}</p>
-                <p className="text-gray-600">Quantity: {item.quantity}</p>
-                <p className="text-gray-800 font-semibold">Total: ₹{(item.dish.price * item.quantity).toFixed(2)}</p>
-              </div>
-            </div>
-            <div className="mt-4 md:mt-0 flex space-x-4">
-              <button
-                onClick={() => handleIncreaseQuantity(item.dish._id)} 
-                className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400"
-              >
-                Increase
-              </button>
-              <button
-                onClick={() => handleDecreaseQuantity(item.dish._id)}  
-                className="bg-yellow-500 text-white px-4 py-2 rounded-md hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-400"
-              >
-                Decrease
-              </button>
-              <button
-                onClick={() => handleRemoveFromCart(item.dish._id)} 
-                className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-400"
-              >
-                Remove
-              </button>
-            </div>
-          </li>
-        ))}
-      </ul>
+  {cartItems.map((item, index) => (
+    <li
+      key={`${item.dish._id}-${index}`} // Combines dish ID with index
+      className="bg-white p-6 rounded-lg shadow-md flex flex-col md:flex-row justify-between items-center"
+    >
+      <div className="flex flex-col md:flex-row items-center">
+        <img
+          src={item.dish.imageUrl || "/placeholder.jpg"}
+          alt={item.dish.name}
+          className="w-24 h-24 md:w-32 md:h-32 object-cover rounded-lg mb-4 md:mb-0"
+        />
+        <div className="ml-4 text-center md:text-left">
+          <h3 className="text-xl font-semibold text-gray-800">
+            {item.dish.name}
+          </h3>
+          <p className="text-gray-600">Price: ₹{item.dish.price}</p>
+          <p className="text-gray-600">Quantity: {item.quantity}</p>
+          <p className="text-gray-800 font-semibold">
+            Total: ₹{(item.dish.price * item.quantity).toFixed(2)}
+          </p>
+        </div>
+      </div>
+      <div className="mt-4 md:mt-0 flex space-x-4">
+        <button
+          onClick={() => handleIncreaseQuantity(item.dish._id)}
+          className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400"
+        >
+          Increase
+        </button>
+        <button
+          onClick={() => handleDecreaseQuantity(item.dish._id)}
+          className="bg-yellow-500 text-white px-4 py-2 rounded-md hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-400"
+        >
+          Decrease
+        </button>
+        <button
+          onClick={() => handleRemoveFromCart(item.dish._id)}
+          className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-400"
+        >
+          Remove
+        </button>
+      </div>
+    </li>
+  ))}
+</ul>
+
     </div>
   );
 }

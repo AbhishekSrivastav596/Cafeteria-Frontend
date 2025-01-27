@@ -1,7 +1,9 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchDishes } from "../slices/DishSlice";
-import { addToCart } from "../slices/CartSlice";
+import { addDishes } from "../slices/DishSlice";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css"; 
 
 function DishPage() {
   const dispatch = useDispatch();
@@ -12,7 +14,9 @@ function DishPage() {
   }, [dispatch]);
 
   const handleAddToCart = (dish) => {
-    dispatch(addToCart(dish));
+    const quantity = 1;
+    dispatch(addDishes(dish._id, quantity));
+    toast.success(`${dish.name} added to the cart!`, { autoClose: 2000 });
   };
 
   if (loading)
@@ -71,6 +75,7 @@ function DishPage() {
           ))}
         </ul>
       )}
+      <ToastContainer /> 
     </div>
   );
 }

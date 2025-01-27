@@ -22,10 +22,14 @@ const dishSlice = createSlice({
       state.loading = false;
       state.error = action.payload;
     },
+    addToCartSuccess: (state, action) => {
+      state.loading = false;
+      state.cartItems = action.payload;
+    }
   },
 });
 
-export const { fetchDishesRequest, fetchDishesSuccess, fetchDishesFailure } = dishSlice.actions;
+export const { fetchDishesRequest, fetchDishesSuccess, fetchDishesFailure,addToCartSuccess } = dishSlice.actions;
 
 export const fetchDishes = () => async (dispatch) => {
   dispatch(fetchDishesRequest());
@@ -34,6 +38,20 @@ export const fetchDishes = () => async (dispatch) => {
     dispatch(fetchDishesSuccess(response.data));
   } catch (error) {
     dispatch(fetchDishesFailure(error.message));
+  }
+};
+
+export const addDishes = (dishId, quantity) => async (dispatch) =>{
+  dispatch(fetchDishesRequest());
+  try{
+    const response = await axios.post('http://localhost:8080/cart/add',{
+      dishId, quantity
+    });
+    console.log(response.data);
+    
+    dispatch(addToCartSuccess(response.data));
+  } catch (error) {
+    console.error(error.message);
   }
 };
 
