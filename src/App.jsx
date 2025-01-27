@@ -7,6 +7,7 @@ import CounterPage from "./pages/CounterPage";
 import DishPage from "./pages/DishPage";
 import Carousel from "./components/Carousel";
 import './index.css'; 
+import HomePage from "./pages/HomePage";
 
 function App() {
   return (
@@ -15,7 +16,7 @@ function App() {
         <Navbar />
         <main className="flex-grow">
           <Routes>
-            <Route path="/" element={<Carousel />} />
+            <Route path="/" element={<><Carousel /><HomePage/></>} />
             <Route path="/cart" element={<CartPage />} />
             <Route path="/counters" element={<CounterPage />} />
             <Route path="/dishes" element={<DishPage />} />
