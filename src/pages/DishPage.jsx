@@ -77,10 +77,10 @@ function DishPage() {
 
       {editingDish && (
         <div className="fixed inset-0 bg-gray-500 bg-opacity-75 flex justify-center items-center z-50">
-          <div className="bg-white p-6 rounded-lg shadow-lg w-1/3">
+          <div className="bg-white p-4 rounded-lg shadow-lg w-1/3">
             <h2 className="text-2xl font-semibold mb-4">Edit Dish</h2>
             <form onSubmit={handleSubmitEdit}>
-              <div className="mb-4">
+              <div className="">
                 <label className="block text-gray-700">Dish Name</label>
                 <input
                   type="text"
@@ -94,7 +94,7 @@ function DishPage() {
                   }
                 />
               </div>
-              <div className="mb-4">
+              <div className="">
                 <label className="block text-gray-700">Description</label>
                 <textarea
                   className="w-full p-2 mt-1 border rounded"
@@ -107,7 +107,7 @@ function DishPage() {
                   }
                 />
               </div>
-              <div className="mb-4">
+              <div className="">
                 <label className="block text-gray-700">Price</label>
                 <input
                   type="number"
@@ -121,7 +121,7 @@ function DishPage() {
                   }
                 />
               </div>
-              <div className="mb-4">
+              <div className="">
                 <label className="block text-gray-700">Stock</label>
                 <select
                   className="w-full p-2 mt-1 border rounded"
@@ -137,7 +137,7 @@ function DishPage() {
                   <option value="false">Out of Stock</option>
                 </select>
               </div>
-              <div className="mb-4">
+              <div className="">
                 <label className="block text-gray-700">Counter (Optional)</label>
                 <input
                   type="text"
