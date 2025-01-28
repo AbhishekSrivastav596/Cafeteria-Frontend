@@ -87,8 +87,8 @@ function CounterPage() {
               </div>
               <div className="mt-4 md:mt-0 flex space-x-4">
                 <button
-                  onClick={() => handleAddMerchant(counter._id, "merchantId")}
-                  className="bg-[#9ba174] text-white px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+                  onClick={() => handleAddMerchant(counter._id, userId)}
+                  className="bg-[#9ba174] text-white px-4 py-2 rounded-md focus:outline-none"
                 >
                   Add Merchant
                 </button>
@@ -96,13 +96,13 @@ function CounterPage() {
                   onClick={() =>
                     handleRemoveMerchant(counter._id, "merchantId")
                   }
-                  className="bg-[#505e4b] text-white px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-400"
+                  className="bg-[#505e4b] text-white px-4 py-2 rounded-md focus:outline-none"
                 >
                   Remove Merchant
                 </button>
                 <button
                   onClick={() => handleDeleteCounter(counter._id)}
-                  className="bg-[#505e4b] text-white px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-red-400"
+                  className="bg-[#505e4b] text-white px-4 py-2 rounded-md focus:outline-non"
                 >
                   Delete Counter
                 </button>

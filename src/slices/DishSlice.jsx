@@ -3,7 +3,6 @@ import axios from 'axios';
 
 const initialState = {
   dishes: [],
-  cartItems: [],
   loading: false,
   error: null,
 };

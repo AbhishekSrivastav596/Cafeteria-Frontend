@@ -54,7 +54,7 @@ export const removeFromCart = ( dishId) => async (dispatch) => {
     console.log("data",response.data)
     dispatch(removeFromCartSuccess(response.data.cart));
   } catch (error) {
-    console.error(error.message);
+    console.error(error.message);   
   }
 };
 
