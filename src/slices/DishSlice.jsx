@@ -59,20 +59,7 @@ export const fetchDishes = () => async (dispatch) => {
   }
 };
 
-export const addDishes = (dishId, quantity) => async (dispatch) => {
-  dispatch(fetchDishesRequest());
-  try {
-    const response = await axios.post('http://localhost:8080/cart/add', {
-      dishId,
-      quantity,
-    });
-    console.log(response.data);
-    dispatch(addToCartSuccess(response.data));
-  } catch (error) {
-    console.error(error.message);
-    dispatch(fetchDishesFailure(error.message));
-  }
-};
+
 
 export const editDishes = (dishId, updatedDishData) => async (dispatch) => {
   dispatch(fetchDishesRequest());

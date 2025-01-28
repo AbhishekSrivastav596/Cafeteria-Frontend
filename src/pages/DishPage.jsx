@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { editDishes, fetchDishes } from "../slices/DishSlice";
-import { addDishes } from "../slices/DishSlice";
+import { addDishes } from "../slices/CartSlice";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import pastaImage from "../assets/pasta.png";

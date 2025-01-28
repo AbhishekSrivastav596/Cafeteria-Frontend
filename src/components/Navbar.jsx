@@ -20,8 +20,7 @@ const pages = ["Dishes", "Counters"];
 const settings = ["Profile", "Logout"];
 
 function Navbar() {
-  const { cartItems  } = useSelector((state) => state.cart);
-  const totalQuantity = cartItems.reduce((acc, item) => acc + item.quantity, 0);
+  const totalQuantity = useSelector((state) => state.cart.cartItems.reduce((acc, item) => acc + item.quantity, 0));
 
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
