@@ -21,7 +21,7 @@ const settings = ["Profile", "Logout"];
 
 function Navbar() {
   const { cartItems  } = useSelector((state) => state.cart);
-
+  const totalQuantity = cartItems.reduce((acc, item) => acc + item.quantity, 0);
 
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -40,11 +40,6 @@ function Navbar() {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
-
-
-  useEffect(() => {
-    console.log("Cart updated:", cartItems); 
-  }, [cartItems]); 
 
   return (
     <AppBar position="static" sx={{ backgroundColor: "#eed9c4" }}>
@@ -124,9 +119,9 @@ function Navbar() {
                   alt="Cart"
                   style={{ width: "30px", height: "30px", marginRight: "3px" }}
                 />
-                {cartItems.length > 0 && (
+                 {totalQuantity > 0 && (
                   <span className="absolute -top-3 -right-1 bg-orange-600 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
-                    {cartItems.length}
+                  {totalQuantity}
                   </span>
                 )}
               </div>
