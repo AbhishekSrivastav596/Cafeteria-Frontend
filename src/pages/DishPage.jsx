@@ -96,17 +96,15 @@ function DishPage() {
 
   return (
     <div className="max-w-6xl mx-auto p-4">
-      <h1 className="text-3xl font-bold text-center mb-6">Available Dishes</h1>
-
-      <div className="text-center mb-6">
+      <div className="flex justify-between items-center mb-6">
+        <h1 className="text-3xl font-bold">Available Dishes</h1>
         <button
           onClick={toggleAddDishForm}
-          className="bg-blue-500 text-white py-2 px-4 rounded-md"
+          className="bg-[#505e4b] text-white py-2 px-4 rounded-md"
         >
           {showAddDishForm ? "Cancel" : "Add Dish"}
         </button>
       </div>
-
           {showAddDishForm && (
       <div className="fixed inset-0 bg-gray-500 bg-opacity-75 flex justify-center items-center z-50">
         <div className="bg-white p-4 rounded-lg shadow-lg w-1/3">
