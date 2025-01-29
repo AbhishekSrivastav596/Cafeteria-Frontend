@@ -5,14 +5,15 @@ import {
   addMerchant,
   removeMerchant,
   deleteCounterAsync,
+  fetchCountersSuccess,
 } from "../slices/CounterSlice";
-import flame from "../assets/flame.png"; 
-import chai from "../assets/chai.png"; 
+import flame from "../assets/flame.png";
+import chai from "../assets/chai.png";
 import { useNavigate } from "react-router-dom";
 
 const counterImages = {
   "Flame on": flame,
-  "Chaishh": chai,
+  Chaishh: chai,
 };
 
 function CounterPage() {
@@ -22,7 +23,10 @@ function CounterPage() {
 
   useEffect(() => {
     dispatch(fetchCounters());
-  }, [dispatch]);
+    return () => {
+      dispatch(fetchCountersSuccess([]));
+    };
+  }, []);
 
   const handleAddMerchant = (counterId, merchantId) => {
     dispatch(addMerchant(counterId, merchantId));
@@ -36,7 +40,7 @@ function CounterPage() {
     dispatch(deleteCounterAsync(counterId));
   };
   const handleImageClick = (counterId) => {
-    navigate('/dishes');
+    navigate("/dishes");
   };
 
   if (loading)
@@ -49,9 +53,7 @@ function CounterPage() {
   if (error)
     return (
       <div className="flex justify-center items-center h-screen">
-        <div className="text-xl font-semibold text-red-500">
-          Error: {error}
-        </div>
+        <div className="text-xl font-semibold text-red-500">Error: {error}</div>
       </div>
     );
 
@@ -71,7 +73,7 @@ function CounterPage() {
             >
               <div className="flex flex-col md:flex-row items-center text-center md:text-left">
                 <img
-                  src={counterImages[counter.name] || "/placeholder.jpg"} 
+                  src={counterImages[counter.name] || "/placeholder.jpg"}
                   alt={counter.name}
                   className="w-30 h-30 object-cover rounded-lg mb-4 md:mb-0 mr-4"
                   onClick={() => handleImageClick(counter._id)}

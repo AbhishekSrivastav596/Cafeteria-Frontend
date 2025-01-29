@@ -11,6 +11,7 @@ import pastaImage from "../assets/pasta.png";
 import burgerImage from "../assets/burger.png";
 import pizzaImage from "../assets/pizza.png";
 import saladImage from "../assets/salad.png";
+import { cartSuccess } from "../slices/CartSlice";
 
 const dishImages = {
   "Pasta Alfredo": pastaImage,
@@ -25,6 +26,9 @@ function CartPage() {
 
   useEffect(() => {
     dispatch(fetchCart());
+    return () =>{
+      dispatch(cartSuccess([]));
+    }
   }, [dispatch]);
 
   const handleIncreaseQuantity = (dishId) => {
