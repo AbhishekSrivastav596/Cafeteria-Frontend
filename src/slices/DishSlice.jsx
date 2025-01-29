@@ -33,10 +33,6 @@ const dishSlice = createSlice({
         dish._id === updatedDish._id ? updatedDish : dish
       );
     },
-    editDishFailure: (state, action) => {
-      state.loading = false;
-      state.error = action.payload;
-    },
   },
 });
 
@@ -46,7 +42,6 @@ export const {
   fetchDishesFailure,
   addToCartSuccess,
   editDishSuccess,
-  editDishFailure,
 } = dishSlice.actions;
 
 export const fetchDishes = () => async (dispatch) => {
@@ -69,7 +64,7 @@ export const editDishes = (dishId, updatedDishData) => async (dispatch) => {
     dispatch(editDishSuccess(response.data));
   } catch (error) {
     console.error('Failed to edit dish:', error.message);
-    dispatch(editDishFailure(error.message));
+    dispatch(fetchDishesFailure(error.message));
   }
 };
 

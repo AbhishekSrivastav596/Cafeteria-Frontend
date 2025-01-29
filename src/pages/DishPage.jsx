@@ -212,7 +212,7 @@ function DishPage() {
           ))}
         </ul>
       )}
-      <ToastContainer position="top-right" autoClose={2000} />
+      <ToastContainer position="top-center" autoClose={500} />
     </div>
   );
 }
