@@ -46,7 +46,7 @@ export const increaseQuantity = (dishId) => async (dispatch) => {
     const response = await axios.patch(`http://localhost:8080/cart/${dishId}`, {
       changeQuantity: 1,
     });
-    console.log("ye hai increased quantity", response.data);
+    console.log("Increased quantity Data: ", response.data);
     dispatch(cartSuccess(response.data));
   } catch (error) {
     console.error(error.message);
@@ -73,7 +73,7 @@ export const clearCart = (userId) => async (dispatch) => {
   }
 };
 
-export const addDishes = (dishId, quantity) => async (dispatch) => {
+export const addTocart = (dishId, quantity) => async (dispatch) => {
   try {
     const response = await axios.post("http://localhost:8080/cart/add", {
       dishId,

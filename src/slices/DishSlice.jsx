@@ -48,7 +48,8 @@ export const fetchDishes = () => async (dispatch) => {
   dispatch(fetchDishesRequest());
   try {
     const response = await axios.get('http://localhost:8080/dishes');
-    dispatch(fetchDishesSuccess(response.data));
+    console.log(response.data);  
+    dispatch(fetchDishesSuccess(response.data.dishes));
   } catch (error) {
     dispatch(fetchDishesFailure(error.message));
   }
@@ -61,11 +62,12 @@ export const editDishes = (dishId, updatedDishData) => async (dispatch) => {
   try {
     const response = await axios.patch(`http://localhost:8080/dishes/${dishId}`,updatedDishData);
     console.log('Dish updated successfully:', response.data);
-    dispatch(editDishSuccess(response.data));
+    dispatch(editDishSuccess(response.data.updatedDish));
   } catch (error) {
     console.error('Failed to edit dish:', error.message);
     dispatch(fetchDishesFailure(error.message));
   }
 };
+
 
 export default dishSlice.reducer;

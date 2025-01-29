@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { editDishes, fetchDishes } from "../slices/DishSlice";
-import { addDishes } from "../slices/CartSlice";
+import { addTocart } from "../slices/CartSlice";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import pastaImage from "../assets/pasta.png";
@@ -35,7 +35,7 @@ function DishPage() {
 
   const handleAddToCart = (dish) => {
     const quantity = 1;
-    dispatch(addDishes(dish._id, quantity));
+    dispatch(addTocart(dish._id, quantity));
     toast.success(`${dish.name} added to the cart!`, { autoClose: 2000 });
   };
 
