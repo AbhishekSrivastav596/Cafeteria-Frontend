@@ -33,6 +33,13 @@ const dishSlice = createSlice({
         dish._id === updatedDish._id ? updatedDish : dish
       );
     },
+    addDishSuccess:(state,action) => {
+      state.loading = false;
+      const newDish = action.payload;
+      state.dishes = state.dishes.map((dish) =>
+        dish._id === newDish._id ? newDish : dish
+      );
+    },
   },
 });
 
@@ -41,6 +48,7 @@ export const {
   fetchDishesSuccess,
   fetchDishesFailure,
   addToCartSuccess,
+  addDishSuccess,
   editDishSuccess,
 } = dishSlice.actions;
 
@@ -68,6 +76,17 @@ export const editDishes = (dishId, updatedDishData) => async (dispatch) => {
     dispatch(fetchDishesFailure(error.message));
   }
 };
+
+export const addNewDish = (newDish) => async(dispatch) => {
+  dispatch(fetchDishesRequest());
+  try{
+    const response = await axios.post('http://localhost:8080/dishes/',newDish);
+    dispatch(addDishSuccess(response.data.newDish));
+  }catch(err){
+    console.log('Error adding new dish:',err.message);
+    dispatch(fetchDishesFailure(err.message));
+  }
+}
 
 
 export default dishSlice.reducer;

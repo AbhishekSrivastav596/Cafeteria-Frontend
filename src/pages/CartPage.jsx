@@ -7,18 +7,9 @@ import {
   decreaseQuantity,
   clearCart,
 } from "../slices/CartSlice";
-import pastaImage from "../assets/pasta.png";
-import burgerImage from "../assets/burger.png";
-import pizzaImage from "../assets/pizza.png";
-import saladImage from "../assets/salad.png";
 import { cartSuccess } from "../slices/CartSlice";
 
-const dishImages = {
-  "Pasta Alfredo": pastaImage,
-  Burger: burgerImage,
-  Pizza: pizzaImage,
-  "Caesar Salad": saladImage,
-};
+
 
 function CartPage() {
   const dispatch = useDispatch();
@@ -86,11 +77,7 @@ function CartPage() {
           >
             <div className="flex flex-col md:flex-row items-center">
               <img
-                src={
-                  dishImages[item.dish.name] ||
-                  item.dish.imageUrl ||
-                  "/placeholder.jpg"
-                }
+                src={item.dish.imageUrl || "/placeholder.jpg"} 
                 alt={item.dish.name}
                 className="w-24 h-30 md:w-32 md:h-32 object-cover rounded-lg mb-4 md:mb-0"
               />
