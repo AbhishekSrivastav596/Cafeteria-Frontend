@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
@@ -8,8 +8,15 @@ import DishPage from "./pages/DishPage";
 import Carousel from "./components/Carousel";
 import './index.css'; 
 import HomePage from "./pages/HomePage";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchCart } from "./slices/CartSlice";
 
 function App() {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchCart());
+  }, [dispatch]);
+  
   return (
     <Router>
       <div className="flex flex-col min-h-screen">
