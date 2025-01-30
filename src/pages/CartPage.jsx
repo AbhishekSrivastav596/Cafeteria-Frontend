@@ -7,7 +7,6 @@ import {
   decreaseQuantity,
   clearCart,
 } from "../slices/CartSlice";
-import { cartSuccess } from "../slices/CartSlice";
 
 
 
@@ -17,9 +16,6 @@ function CartPage() {
 
   useEffect(() => {
     dispatch(fetchCart());
-    return () =>{
-      dispatch(cartSuccess([]));
-    }
   }, [dispatch]);
 
   const handleIncreaseQuantity = (dishId) => {
