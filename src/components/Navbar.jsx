@@ -117,20 +117,24 @@ function Navbar() {
                 display: "flex",
                 alignItems: "center",
               }}
-            >
-              <div style={{ position: "relative" }}>
-                <img
-                  src={cartIcon}
-                  alt="Cart"
-                  style={{ width: "30px", height: "30px", marginRight: "3px" }}
-                />
-                 {totalQuantity > 0 && (
-                  <span className="absolute -top-3 -right-1 bg-orange-600 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
-                  {totalQuantity}
-                  </span>
-                )}
-              </div>
-                {loading ? "Loading..." : "Cart"}
+            >   
+             {loading ? ("Loading...") : (
+                <div style={{ display: "flex", alignItems: "center", position: "relative" }}>
+                  <div style={{ position: "relative" }}>
+                    <img
+                      src={cartIcon}
+                      alt="Cart"
+                      style={{ width: "30px", height: "30px", marginRight: "3px" }}
+                    />
+                    {totalQuantity > 0 && (
+                      <span className="absolute -top-3 -right-1 bg-orange-600 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
+                        {totalQuantity}
+                      </span>
+                    )}
+                  </div>
+                  <span style={{ marginLeft: "5px" }}>Cart</span>
+                </div>
+              )}
             </Button>
             </Link>
 
