@@ -21,6 +21,7 @@ const settings = ["Profile", "Logout"];
 
 function Navbar() {
   const totalQuantity = useSelector((state) => state.cart.cartItems.reduce((acc, item) => acc + item.quantity, 0));
+  const loading = useSelector(state => state.cart.loading);
 
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -103,6 +104,11 @@ function Navbar() {
             ))}
           </Box>
           <Box sx={{ flexGrow: 0, display: "flex", alignItems: "center" }}>
+            
+          <Link
+                to="/cart"
+                style={{ textDecoration: "none", color: "black" }}
+              >
             <Button
               sx={{
                 color: "black",
@@ -124,13 +130,9 @@ function Navbar() {
                   </span>
                 )}
               </div>
-              <Link
-                to="/cart"
-                style={{ textDecoration: "none", color: "black" }}
-              >
-                Cart
-              </Link>
+                {loading ? "Loading..." : "Cart"}
             </Button>
+            </Link>
 
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>

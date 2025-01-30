@@ -14,9 +14,7 @@ function CartPage() {
   const dispatch = useDispatch();
   const { cartItems = [] } = useSelector((state) => state.cart);
 
-  useEffect(() => {
-    dispatch(fetchCart());
-  }, [dispatch]);
+ 
 
   const handleIncreaseQuantity = (dishId) => {
     dispatch(increaseQuantity(dishId));
