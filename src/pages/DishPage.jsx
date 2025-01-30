@@ -9,6 +9,7 @@ import "react-toastify/dist/ReactToastify.css";
 function DishPage() {
   const dispatch = useDispatch();
   const { dishes, loading, error } = useSelector((state) => state.dish);
+  const cartDishIds = useSelector((state) => state.cart.cartItems.map(item => item.dish._id));
 
   const [editingDish, setEditingDish] = useState(null);
   const [updatedDishData, setUpdatedDishData] = useState({
@@ -39,7 +40,6 @@ function DishPage() {
   const handleAddToCart = (dish) => {
     const quantity = 1;
     dispatch(addTocart(dish._id, quantity));
-    toast.success(`${dish.name} added to the cart!`, { autoClose: 2000 });
   };
 
   const handleEditDish = (dish) => {
@@ -348,12 +348,19 @@ function DishPage() {
                   {dish.description}
                 </p>
               </div>
-              <button
-                onClick={() => handleAddToCart(dish)}
-                className="w-full mt-4 bg-[#505e4b] text-white py-2 px-6 rounded-md focus:outline-none"
-              >
-                Add to Cart
-              </button>
+              {cartDishIds.includes(dish._id) ? (
+                <button className="w-full mt-4 bg-gray-400 text-white py-2 px-6 rounded-md cursor-not-allowed">
+                  Added to Cart!
+                </button>
+              ) : (
+                <button
+                  onClick={() => handleAddToCart(dish)}
+                  className="w-full mt-4 bg-[#505e4b] text-white py-2 px-6 rounded-md focus:outline-none"
+                >
+                  Add to Cart
+                </button>
+              )}
+
               <button
                 onClick={() => handleEditDish(dish)}
                 className="w-full mt-4 bg-[#505e4b] text-white py-2 px-6 rounded-md focus:outline-none"
@@ -364,7 +371,6 @@ function DishPage() {
           ))}
         </ul>
       )}
-      <ToastContainer position="top-center" autoClose={500} />
     </div>
   );
 }

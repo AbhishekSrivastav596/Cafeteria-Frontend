@@ -3,6 +3,7 @@ import axios from 'axios';
 
 const initialState = {
   cartItems: [],  
+  loading: true,
 };
 
 const cartSlice = createSlice({
@@ -15,18 +16,23 @@ const cartSlice = createSlice({
     clearCartSuccess: (state) => {
       state.cartItems = [];
     },
+    setCartLoading: (state, action) => {
+      state.loading = action.payload;
+    },
   },
 });
 
-export const { cartSuccess, clearCartSuccess } = cartSlice.actions;
+export const { cartSuccess, clearCartSuccess, setCartLoading } = cartSlice.actions;
 
 export const fetchCart = () => async (dispatch) => {
+  dispatch(setCartLoading(true));
   try {
     const response = await axios.get("http://localhost:8080/cart");
     dispatch(cartSuccess(response.data.cart));
   } catch (error) {
     console.error(error.message);
   }
+  dispatch(setCartLoading(false));
 };
 
 export const removeFromCart = (dishId) => async (dispatch) => {
@@ -74,6 +80,7 @@ export const clearCart = (userId) => async (dispatch) => {
 };
 
 export const addTocart = (dishId, quantity) => async (dispatch) => {
+  dispatch(setCartLoading(true));
   try {
     const response = await axios.post("http://localhost:8080/cart/add", {
       dishId,
@@ -84,6 +91,8 @@ export const addTocart = (dishId, quantity) => async (dispatch) => {
   } catch (error) {
     console.error(error.message);
   }
+  dispatch(setCartLoading(false));
+
 };
 
 export default cartSlice.reducer;
