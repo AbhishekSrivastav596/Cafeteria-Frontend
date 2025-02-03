@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {fetchDishes,fetchDishesSuccess,editDishes,addNewDish,selectCartDishId} from "../slices/DishSlice";
+import {fetchDishes,fetchDishesSuccess,selectCartDishId} from "../slices/DishSlice";
 import { addTocart } from "../slices/CartSlice";
-import DishForm from "../components/DishForm";
 import DishList from "../components/DishList";
 
 function DishPage() {

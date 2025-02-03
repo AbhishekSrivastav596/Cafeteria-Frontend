@@ -1,15 +1,8 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  fetchCounters,
-  addMerchant,
-  removeMerchant,
-  deleteCounterAsync,
-  fetchCountersSuccess,
-} from "../slices/CounterSlice";
+import { fetchCounters,addMerchant,removeMerchant,deleteCounterAsync,fetchCountersSuccess } from "../slices/CounterSlice";
 import flame from "../assets/flame.png";
 import chai from "../assets/chai.png";
-import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 
 const counterImages = {
@@ -18,7 +11,6 @@ const counterImages = {
 };
 
 function CounterPage() {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
   const { counters, loading, error } = useSelector((state) => state.counter);
 

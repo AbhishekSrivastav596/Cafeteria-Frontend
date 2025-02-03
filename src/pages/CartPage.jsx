@@ -1,12 +1,6 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  fetchCart,
-  removeFromCart,
-  increaseQuantity,
-  decreaseQuantity,
-  clearCart,
-} from "../slices/CartSlice";
+import { removeFromCart,increaseQuantity,decreaseQuantity,clearCart } from "../slices/CartSlice";
 
 
 
