@@ -13,7 +13,7 @@ function DishItem({ dish, onAddToCart, onEditDish, isInCart,showCounterName }){
           {dish.name}
         </h3>
         <p className="text-gray-600 mt-2 text-center">Price: ₹{dish.price}</p>
-        <p className="text-gray-500 mt-2 text-center text-sm">
+        <p className="text-gray-500 mt-2 text-center text-sm italic">
           {dish.description}
         </p>
         {showCounterName && (
