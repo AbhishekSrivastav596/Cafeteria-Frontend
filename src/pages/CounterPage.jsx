@@ -10,6 +10,7 @@ import {
 import flame from "../assets/flame.png";
 import chai from "../assets/chai.png";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const counterImages = {
   "Flame on": flame,
@@ -38,9 +39,6 @@ function CounterPage() {
 
   const handleDeleteCounter = (counterId) => {
     dispatch(deleteCounterAsync(counterId));
-  };
-  const handleImageClick = (counterId) => {
-    navigate("/dishes");
   };
 
   if (loading)
@@ -72,12 +70,13 @@ function CounterPage() {
               className="bg-white transition duration-300 hover:scale-101 focus:ring-[#faf0e6] p-6 rounded-lg shadow-md flex flex-col md:flex-row justify-between items-center"
             >
               <div className="flex flex-col md:flex-row items-center text-center md:text-left">
+              <Link to={`/dishes/${counter._id}`}>
                 <img
                   src={counterImages[counter.name] || "/placeholder.jpg"}
                   alt={counter.name}
                   className="w-30 h-30 object-cover rounded-lg mb-4 md:mb-0 mr-4"
-                  onClick={() => handleImageClick(counter._id)}
                 />
+              </Link>
                 <div>
                   <h3 className="text-xl font-semibold text-gray-800">
                     {counter.name}

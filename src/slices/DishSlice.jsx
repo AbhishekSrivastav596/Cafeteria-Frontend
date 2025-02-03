@@ -43,6 +43,9 @@ const dishSlice = createSlice({
   },
 });
 
+export const selectCartDishId = (state) => state.cart.cartItems.map(item => item.dish._id);
+
+
 export const {
   fetchDishesRequest,
   fetchDishesSuccess,
@@ -63,6 +66,16 @@ export const fetchDishes = () => async (dispatch) => {
   }
 };
 
+export const fetchDishByCounter = (counterId) => async (dispatch) => {
+  dispatch(fetchDishesRequest());
+  try{
+    const response = await axios.get(`http://localhost:8080/dishes/counter/${counterId}`);
+    console.log(response.data);
+    dispatch(fetchDishesSuccess(response.data.dishes));
+  }catch(err){
+    dispatch(fetchDishesFailure(err.message));
+  }
+}
 
 
 export const editDishes = (dishId, updatedDishData) => async (dispatch) => {

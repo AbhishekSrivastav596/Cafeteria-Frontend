@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { editDishes, fetchDishes, addNewDish,fetchDishesSuccess } from "../slices/DishSlice";
+import { editDishes, fetchDishes, addNewDish,fetchDishesSuccess, selectCartDishId } from "../slices/DishSlice";
 import { addTocart } from "../slices/CartSlice";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -9,7 +9,7 @@ import "react-toastify/dist/ReactToastify.css";
 function DishPage() {
   const dispatch = useDispatch();
   const { dishes, loading, error } = useSelector((state) => state.dish);
-  const cartDishIds = useSelector((state) => state.cart.cartItems.map(item => item.dish._id));
+  const cartDishIds = useSelector(selectCartDishId);
 
   const [editingDish, setEditingDish] = useState(null);
   const [updatedDishData, setUpdatedDishData] = useState({

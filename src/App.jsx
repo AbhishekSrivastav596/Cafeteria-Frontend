@@ -10,6 +10,7 @@ import './index.css';
 import HomePage from "./pages/HomePage";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCart } from "./slices/CartSlice";
+import DishByCounterPage from "./pages/DishByCounterPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -27,6 +28,7 @@ function App() {
             <Route path="/cart" element={<CartPage />} />
             <Route path="/counters" element={<CounterPage />} />
             <Route path="/dishes" element={<DishPage />} />
+            <Route path="/dishes/:counterId" element={<DishByCounterPage/>} />
           </Routes>
         </main>
         <Footer />
