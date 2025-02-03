@@ -1,13 +1,14 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { fetchDishByCounter } from "../slices/DishSlice"
+import { fetchDishByCounter, selectCartDishId } from "../slices/DishSlice"
 
 const DishByCounterPage = () => {
   const { counterId } = useParams(); 
   const dispatch = useDispatch();
   const { dishes, loading, error } = useSelector((state) => state.dish);
-  const cartDishIds = useSelector((state) => state.cart.cartItems.map(item => item.dish._id));
+  const cartDishIds = useSelector(selectCartDishId);
+  
   
 
   useEffect(() => {

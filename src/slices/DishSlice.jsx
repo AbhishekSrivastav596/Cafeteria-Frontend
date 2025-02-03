@@ -1,5 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
+import { createSelector } from 'reselect';
+
 
 const initialState = {
   dishes: [],
@@ -43,7 +45,13 @@ const dishSlice = createSlice({
   },
 });
 
-export const selectCartDishId = (state) => state.cart.cartItems.map(item => item.dish._id);
+const getCartItems = (state) => state.cart.cartItems;
+
+export const selectCartDishId = createSelector(
+  [getCartItems],
+  (cartItems) => cartItems.map(item => item.dish._id)
+);
+
 
 
 export const {
