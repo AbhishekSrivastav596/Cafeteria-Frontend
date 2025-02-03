@@ -11,6 +11,7 @@ import HomePage from "./pages/HomePage";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCart } from "./slices/CartSlice";
 import DishByCounterPage from "./pages/DishByCounterPage";
+import ScrollToTop from "./components/ScrollToTop";
 
 function App() {
   const dispatch = useDispatch();
@@ -32,6 +33,8 @@ function App() {
           </Routes>
         </main>
         <Footer />
+       <ScrollToTop/>
+
       </div>
     </Router>
   );
