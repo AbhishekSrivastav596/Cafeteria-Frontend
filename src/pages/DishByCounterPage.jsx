@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { fetchDishByCounter, editDishes, addNewDish, selectCartDishId } from "../slices/DishSlice";
+import { fetchDishByCounter, editDishes, addNewDish, selectCartDishId, fetchDishesSuccess } from "../slices/DishSlice";
 import { addTocart } from "../slices/CartSlice";
 import DishForm from "../components/DishForm";
 import DishList from "../components/DishList";
@@ -25,6 +25,9 @@ const DishByCounterPage = () => {
 
   useEffect(() => {
     dispatch(fetchDishByCounter(counterId)); 
+    return () =>{
+     dispatch(fetchDishesSuccess([]));
+    }
   }, [counterId, dispatch]);
 
   const handleAddToCart = (dish) => {
