@@ -67,7 +67,7 @@ function CartPage() {
         {cartItems.map((item, index) => (
           <li
             key={`${item.dish._id}-${index}`}
-            className="bg-white hover:bg-[#fbf7f3] focus:ring-[#faf0e6] p-6 rounded-lg shadow-md flex flex-col md:flex-row justify-between items-center"
+            className="bg-white transition duration-300 hover:scale-101 focus:ring-[#faf0e6] p-6 rounded-lg shadow-md flex flex-col md:flex-row justify-between items-center"
           >
             <div className="flex flex-col md:flex-row items-center">
               <img

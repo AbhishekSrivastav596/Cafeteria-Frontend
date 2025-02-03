@@ -330,7 +330,7 @@ function DishPage() {
           {dishes.map((dish) => (
             <li
               key={dish._id}
-              className="bg-white hover:bg-[#faf0e6] focus:ring-[#faf0e6] p-6 rounded-lg shadow-md hover:shadow-lg transform transition duration-300 hover:scale-105"
+              className="bg-white focus:ring-[#faf0e6] p-6 rounded-lg shadow-md hover:shadow-lg transform transition duration-300 hover:scale-105"
             >
               <div className="flex flex-col items-center">
                 <img
