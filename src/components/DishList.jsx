@@ -9,7 +9,7 @@ function DishList({ dishes, cartDishIds, handleAddToCart, handleEditDish }) {
           key={dish._id}
           dish={dish}
           onAddToCart={() => handleAddToCart(dish)}
-          onEditDish={() => handleEditDish(dish)}
+          onEditDish={handleEditDish ? () => handleEditDish(dish) : null}
           isInCart={cartDishIds.includes(dish._id)}
         />
       ))}

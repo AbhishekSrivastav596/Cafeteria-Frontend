@@ -24,12 +24,14 @@ function DishItem({ dish, onAddToCart, onEditDish, isInCart }){
       >
         {isInCart ? "Added to Cart!" : "Add to Cart"}
       </button>
-      <button
-        onClick={onEditDish}
-        className="w-full mt-4 bg-[#505e4b] text-white py-2 px-6 rounded-md"
-      >
-        Edit Dish
-      </button>
+      {onEditDish && (
+        <button
+          onClick={onEditDish}
+          className="w-full mt-4 bg-[#505e4b] text-white py-2 px-6 rounded-md"
+        >
+          Edit Dish
+        </button>
+      )}
     </li>
   );
 };
