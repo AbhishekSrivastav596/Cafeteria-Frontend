@@ -56,9 +56,9 @@ function DishForm({dishData,onDishDataChange,onSubmit,formType = "Add", onCancel
         <label className="block text-gray-700">Counter</label>
         <input
           type="text"
-          className="w-full p-2 mt-1 border rounded"
+          className="w-full p-2 mt-1 border rounded bg-gray-200 cursor-not-allowed"
           value={dishData.counter}
-          onChange={(e) =>onDishDataChange({ ...dishData, counter: e.target.value })}
+          readOnly 
         />
       </div>
       <button
