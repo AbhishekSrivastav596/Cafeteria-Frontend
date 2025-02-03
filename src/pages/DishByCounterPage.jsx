@@ -126,6 +126,7 @@ const DishByCounterPage = () => {
           cartDishIds={cartDishIds}
           handleAddToCart={handleAddToCart}
           handleEditDish={handleEditDish}
+          showCounterName={false}
         />
       )}
     </div>

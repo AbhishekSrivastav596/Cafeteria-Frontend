@@ -1,8 +1,8 @@
 import React from "react";
 
-function DishItem({ dish, onAddToCart, onEditDish, isInCart }){
+function DishItem({ dish, onAddToCart, onEditDish, isInCart,showCounterName }){
   return (
-    <li className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transform transition duration-300 hover:scale-105">
+    <li className="relative bg-white p-6 rounded-lg shadow-md hover:shadow-lg transform transition duration-300 hover:scale-105">
       <div className="flex flex-col items-center">
         <img
           src={dish.imageUrl || "/placeholder.jpg"}
@@ -16,6 +16,11 @@ function DishItem({ dish, onAddToCart, onEditDish, isInCart }){
         <p className="text-gray-500 mt-2 text-center text-sm">
           {dish.description}
         </p>
+        {showCounterName && (
+          <p className="absolute top-3 right-2 bg-red-600 text-white text-xs font-bold px-2 py-1 rounded-full">
+            {dish.counter?.name || "Unknown Counter"}
+          </p>
+        )}
       </div>
       <button
         onClick={onAddToCart}
