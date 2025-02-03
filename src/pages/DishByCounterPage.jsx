@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { fetchDishByCounter, editDishes, addNewDish, selectCartDishId } from "../slices/DishSlice";
 import { addTocart } from "../slices/CartSlice";
 import DishForm from "../components/DishForm";
+import DishList from "../components/DishList";
 
 const DishByCounterPage = () => {
   const { counterId } = useParams(); 
@@ -120,43 +121,12 @@ const DishByCounterPage = () => {
       ) : dishes.length === 0 ? (
         <div className="text-center text-lg text-gray-500">No dishes available.</div>
       ) : (
-        <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {dishes.map((dish) => (
-            <li
-              key={dish._id}
-              className="bg-white focus:ring-[#faf0e6] p-6 rounded-lg shadow-md hover:shadow-lg transform transition duration-300 hover:scale-105"
-            >
-              <div className="flex flex-col items-center text-center">
-                <img
-                  src={dish.imageUrl || "/placeholder.jpg"}
-                  alt={dish.name}
-                  className="w-full h-50 object-cover rounded-lg mb-4"
-                />
-                <h3 className="text-xl font-semibold text-gray-800">{dish.name}</h3>
-                <p className="text-gray-600 mt-2">Price: ₹{dish.price}</p>
-                <p className="text-gray-500 mt-2 text-sm">{dish.description}</p>
-              </div>
-              {cartDishIds.includes(dish._id) ? (
-                <button className="w-full mt-4 bg-gray-400 text-white py-2 px-6 rounded-md cursor-not-allowed">
-                  Added to Cart!
-                </button>
-              ) : (
-                <button
-                  onClick={() => handleAddToCart(dish)}
-                  className="w-full mt-4 bg-[#505e4b] text-white py-2 px-6 rounded-md focus:outline-none"
-                >
-                  Add to Cart
-                </button>
-              )}
-              <button
-                onClick={() => handleEditDish(dish)}
-                className="w-full mt-4 bg-[#505e4b] text-white py-2 px-6 rounded-md focus:outline-none"
-              >
-                Edit Dish
-              </button>
-            </li>
-          ))}
-        </ul>
+        <DishList
+          dishes={dishes}
+          cartDishIds={cartDishIds}
+          handleAddToCart={handleAddToCart}
+          handleEditDish={handleEditDish}
+        />
       )}
     </div>
   );
