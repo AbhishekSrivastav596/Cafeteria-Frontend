@@ -2,13 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCounters } from "../slices/CounterSlice"; 
 import { useNavigate } from "react-router-dom"; 
-import flame from "../assets/flame.png"; 
-import chai from "../assets/chai.png"; 
-
-const counterImages = {
-  "Flame on": flame,
-  "Chaishh": chai,
-};
+import { Link } from "react-router-dom";
 
 function HomePage() {
   const dispatch = useDispatch();
@@ -18,10 +12,6 @@ function HomePage() {
   useEffect(() => {
     dispatch(fetchCounters());
   }, [dispatch]);
-
-  const handleImageClick = (counterId) => {
-    navigate('/dishes');
-  };
 
   if (loading) {
     return (
@@ -51,13 +41,13 @@ function HomePage() {
               key={counter._id} 
               className="relative bg-white rounded-2xl shadow-md overflow-hidden"
             >
+              <Link to={`/dishes/${counter._id}`} className="w-full">
               <img
-                src={counterImages[counter.name] || "/placeholder.jpg"} 
+                src={counter.imageUrl || "/placeholder.jpg"} 
                 alt={counter.name}
                 className="w-full h-50 object-cover rounded-t-2xl cursor-pointer"
-                onClick={() => handleImageClick(counter._id)}
               />
-
+              </Link>
               <div className="p-4">
                 <h2 className="text-center text-lg font-bold mb-2">{counter.name}</h2>
                 <p className="text-sm text-gray-600">{counter.subtitle}</p>
