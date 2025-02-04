@@ -5,17 +5,19 @@ import { Link } from "react-router-dom";
 
 function CounterPage() {
   const dispatch = useDispatch();
-  const { counters, loading, error,merchants } = useSelector((state) => state.counter);
+  const { counters, loading, error, merchants } = useSelector((state) => state.counter);
   const [editCounter, setEditCounter] = useState(null);
   const [formData, setFormData] = useState({
     name: "",
     imageUrl: "",
+    description: "",
     merchants: [],
   });
   const [newCounterForm, setNewCounterForm] = useState(false);
   const [newCounterData, setNewCounterData] = useState({
     name: "",
     imageUrl: "",
+    description: "",
     merchants: [],
   });
 
@@ -29,6 +31,7 @@ function CounterPage() {
     setFormData({
       name: counter.name,
       imageUrl: counter.imageUrl,
+      description: counter.description || "", 
       merchants: counter.merchants.map((merchant) => merchant._id) || [],
     });
   };
@@ -123,6 +126,13 @@ function CounterPage() {
               className="w-full p-2 border rounded mb-2"
               placeholder="Image URL"
             />
+            <textarea
+              name="description"
+              value={newCounterData.description}
+              onChange={handleNewCounterInputChange}
+              className="w-full p-2 border rounded mb-2"
+              placeholder="Description"
+            />
             <h3 className="text-lg font-semibold mt-2 mb-2">Assign Merchants</h3>
             <div className="max-h-40 overflow-y-auto">
               {merchants.map((merchant) => (
@@ -174,6 +184,7 @@ function CounterPage() {
                 <div>
                   <h3 className="text-xl font-semibold text-gray-800">{counter.name}</h3>
                   <p className="text-gray-600">Merchants: {counter.merchants.length}</p>
+                  <p className="text-gray-600 mt-2">{counter.description}</p> 
                 </div>
               </div>
               <div className="mt-4 md:mt-0 flex space-x-4">
@@ -214,6 +225,13 @@ function CounterPage() {
               onChange={handleInputChange}
               className="w-full p-2 border rounded mb-2"
               placeholder="Image URL"
+            />
+            <textarea
+              name="description"
+              value={formData.description}
+              onChange={handleInputChange}
+              className="w-full p-2 border rounded mb-2"
+              placeholder="Description"
             />
             <h3 className="text-lg font-semibold mt-2 mb-2">Assign Merchants</h3>
             <div className="max-h-40 overflow-y-auto">
