@@ -42,6 +42,7 @@ function DishPage() {
         cartDishIds={cartDishIds}
         handleAddToCart={handleAddToCart}
         showCounterName={true}
+        showDeleteButton={false} 
       />
     </div>
     </div>

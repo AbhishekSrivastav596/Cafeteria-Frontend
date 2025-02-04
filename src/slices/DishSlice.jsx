@@ -42,6 +42,10 @@ const dishSlice = createSlice({
         dish._id === newDish._id ? newDish : dish
       );
     },
+    deleteDishSuccess: (state, action) => {
+      state.loading = false;
+      state.dishes = state.dishes.filter((dish) => dish._id !== action.payload);
+    },
   },
 });
 
@@ -61,6 +65,7 @@ export const {
   addToCartSuccess,
   addDishSuccess,
   editDishSuccess,
+  deleteDishSuccess,
 } = dishSlice.actions;
 
 export const fetchDishes = () => async (dispatch) => {
@@ -108,6 +113,16 @@ export const addNewDish = (newDish) => async(dispatch) => {
     dispatch(fetchDishesFailure(err.message));
   }
 }
+
+export const deleteDish = (dishId) => async (dispatch) => {
+  dispatch(fetchDishesRequest());
+  try {
+    const response = await axios.delete(`http://localhost:8080/dishes/${dishId}`);
+    dispatch(deleteDishSuccess(dishId)); 
+  } catch (error) {
+    dispatch(fetchDishesFailure(error.message));
+  }
+};
 
 
 export default dishSlice.reducer;

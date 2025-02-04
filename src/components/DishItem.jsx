@@ -1,6 +1,6 @@
 import React from "react";
 
-function DishItem({ dish, onAddToCart, onEditDish, isInCart,showCounterName }){
+function DishItem({ dish, onAddToCart, onEditDish, isInCart,showCounterName, showDeleteButton, onDeleteDish }){
   return (
     <li className="relative bg-white p-6 rounded-2xl shadow-md hover:shadow-xl transition duration-300 hover:scale-105 border border-gray-800 flex flex-col overflow-hidden">
     <div className="flex flex-col items-center">
@@ -18,23 +18,37 @@ function DishItem({ dish, onAddToCart, onEditDish, isInCart,showCounterName }){
         </p>
       )}
     </div>
-    <div className="mt-4 flex justify-center space-x-4">
+    <div className="mt-4">
+        <div className="mt-4 flex justify-between space-x-4">
+        {onEditDish && (
+          <button
+            onClick={onEditDish}
+            className="w-full bg-gray-900 text-white py-2 px-6 rounded-md"
+          >
+            Edit Dish
+          </button>
+        )}
+
+        {showDeleteButton && (
+          <button
+            onClick={() => onDeleteDish(dish._id)}
+            className="w-full bg-red-700 text-white py-2 px-6 rounded-md"
+          >
+            Delete Dish
+          </button>
+        )}
+      </div>
       <button
         onClick={onAddToCart}
-        className={`w-full mt-4 ${isInCart ? "bg-gray-400" : "bg-[#505e4b]"} text-white py-2 px-6 rounded-md`}
+        className={`w-full mt-4 ${isInCart ? "bg-gray-400" : "bg-[#505e4b]"} text-white py-2 rounded-md`}
         disabled={isInCart}
       >
         {isInCart ? "Added to Cart!" : "Add to Cart"}
       </button>
-      {onEditDish && (
-        <button
-          onClick={onEditDish}
-          className="w-full mt-4 bg-[#505e4b] text-white py-2 px-6 rounded-md"
-        >
-          Edit Dish
-        </button>
-      )}
-    </div>
+
+</div>
+
+
   </li>
   
   );

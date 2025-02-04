@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { fetchDishByCounter, editDishes, addNewDish, selectCartDishId, fetchDishesSuccess } from "../slices/DishSlice";
+import { fetchDishByCounter, editDishes, addNewDish, selectCartDishId, fetchDishesSuccess, deleteDish } from "../slices/DishSlice";
 import { addTocart } from "../slices/CartSlice";
 import DishForm from "../components/DishForm";
 import DishList from "../components/DishList";
@@ -72,6 +72,12 @@ const DishByCounterPage = () => {
     handleCancel();
   };
 
+  const handleDeleteDish = (dishId) => {
+    if (window.confirm("Are you sure you want to delete this dish?")) {
+      dispatch(deleteDish(dishId));
+    }
+  };
+
   return (
     <div className="max-w-6xl mx-auto p-4">
       <div className="flex justify-between items-center mb-6">
@@ -130,6 +136,8 @@ const DishByCounterPage = () => {
           handleAddToCart={handleAddToCart}
           handleEditDish={handleEditDish}
           showCounterName={false}
+          handleDeleteDish={handleDeleteDish}
+          showDeleteButton={true}
         />
       )}
     </div>
