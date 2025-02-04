@@ -1,14 +1,15 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { removeFromCart,increaseQuantity,decreaseQuantity,clearCart } from "../slices/CartSlice";
-
-
+import {
+  removeFromCart,
+  increaseQuantity,
+  decreaseQuantity,
+  clearCart,
+} from "../slices/CartSlice";
 
 function CartPage() {
   const dispatch = useDispatch();
   const { cartItems = [] } = useSelector((state) => state.cart);
-
- 
 
   const handleIncreaseQuantity = (dishId) => {
     dispatch(increaseQuantity(dishId));
@@ -61,11 +62,11 @@ function CartPage() {
         {cartItems.map((item, index) => (
           <li
             key={`${item.dish._id}-${index}`}
-            className="bg-white transition duration-300 hover:scale-101 focus:ring-[#faf0e6] p-6 rounded-lg shadow-md flex flex-col md:flex-row justify-between items-center"
+            className="bg-white transition duration-300 hover:scale-101 focus:ring-[#faf0e6] p-6 rounded-lg shadow-lg hover:shadow-xl border-1 border-[#2d2d2d] flex flex-col md:flex-row justify-between items-center"
           >
             <div className="flex flex-col md:flex-row items-center">
               <img
-                src={item.dish.imageUrl || "/placeholder.jpg"} 
+                src={item.dish.imageUrl || "/placeholder.jpg"}
                 alt={item.dish.name}
                 className="w-24 h-30 md:w-32 md:h-32 object-cover rounded-lg mb-4 md:mb-0"
               />
@@ -81,22 +82,23 @@ function CartPage() {
                 </p>
               </div>
             </div>
+
             <div className="mt-4 md:mt-0 flex space-x-4">
               <button
                 onClick={() => handleIncreaseQuantity(item.dish._id)}
-                className="bg-[#9ba174] text-white px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-[#404D3C]"
+                className="bg-[#9ba174] text-white px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-[#404D3C] hover:bg-[#7c8b56] border-2 border-[#2d2d2d]"
               >
                 Increase
               </button>
               <button
                 onClick={() => handleDecreaseQuantity(item.dish._id)}
-                className="bg-[#505e4b] text-white px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-[#404D3C]"
+                className="bg-[#505e4b] text-white px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-[#404D3C] hover:bg-[#3f4b3b] border-2 border-[#2d2d2d]"
               >
                 Decrease
               </button>
               <button
                 onClick={() => handleRemoveFromCart(item.dish._id)}
-                className="bg-[#505e4b] text-white px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-[#404D3C]"
+                className="bg-[#d64d4d] text-white px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-[#404D3C] hover:bg-[#a83838] border-2 border-[#2d2d2d]"
               >
                 Remove
               </button>
