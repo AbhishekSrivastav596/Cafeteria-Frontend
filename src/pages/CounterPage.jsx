@@ -1,14 +1,8 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCounters,addMerchant,removeMerchant,deleteCounterAsync,fetchCountersSuccess } from "../slices/CounterSlice";
-import flame from "../assets/flame.png";
-import chai from "../assets/chai.png";
 import { Link } from "react-router-dom";
 
-const counterImages = {
-  "Flame on": flame,
-  Chaishh: chai,
-};
 
 function CounterPage() {
   const dispatch = useDispatch();
@@ -64,7 +58,7 @@ function CounterPage() {
               <div className="flex flex-col md:flex-row items-center text-center md:text-left">
               <Link to={`/dishes/${counter._id}`}>
                 <img
-                  src={counterImages[counter.name] || "/placeholder.jpg"}
+                  src={counter.imageUrl || "/placeholder.jpg"}
                   alt={counter.name}
                   className="w-30 h-30 object-cover rounded-lg mb-4 md:mb-0 mr-4"
                 />
