@@ -97,7 +97,6 @@ function CounterPage() {
   return (
     <div className="max-w-6xl mx-auto p-4 mb-10">
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-3xl font-bold">Counters</h1>
         <button
           onClick={() => setNewCounterForm(true)}
           className="bg-green-600 text-white px-4 py-2 rounded-md focus:outline-none"
@@ -163,43 +162,43 @@ function CounterPage() {
           </div>
         </div>
       )}
-
+  
       {counters.length === 0 ? (
         <div className="text-center text-lg text-gray-500">No counters available.</div>
       ) : (
-        <ul className="space-y-6">
+        <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {counters.map((counter) => (
             <li
               key={counter._id}
-              className="bg-white transition duration-300 hover:scale-101 focus:ring-[#faf0e6] p-6 rounded-lg shadow-md flex flex-col md:flex-row justify-between items-center"
+              className="bg-white transition duration-300 hover:shadow-2xl rounded-2xl shadow-md border border-gray-800 flex flex-col overflow-hidden"
             >
-              <div className="flex flex-col md:flex-row items-center text-center md:text-left">
-                <Link to={`/dishes/${counter._id}`}>
-                  <img
-                    src={counter.imageUrl || "/placeholder.jpg"}
-                    alt={counter.name}
-                    className="w-30 h-30 object-cover rounded-lg mb-4 md:mb-0 mr-4"
-                  />
-                </Link>
-                <div>
-                  <h3 className="text-xl font-semibold text-gray-800">{counter.name}</h3>
-                  <p className="text-gray-600">Merchants: {counter.merchants.length}</p>
-                  <p className="text-gray-600 mt-2">{counter.description}</p> 
+              <Link to={`/dishes/${counter._id}`} className="w-full">
+                <img
+                  src={counter.imageUrl || "/placeholder.jpg"}
+                  alt={counter.name}
+                  className="w-full h-48 object-cover rounded-t-2xl border-b border-gray-800"
+                />
+              </Link>
+              <div className="p-6 text-center">
+                <h3 className="text-2xl font-semibold text-gray-900">{counter.name}</h3>
+                <p className="text-gray-700 text-sm mt-1">
+                  Merchants: <span className="font-medium">{counter.merchants.length}</span>
+                </p>
+                <p className="text-gray-600 mt-2 text-sm leading-relaxed italic font-bold">{counter.description}</p>
+                <div className="mt-5 flex justify-center space-x-4">
+                  <button
+                    onClick={() => handleEditClick(counter)}
+                    className="bg-gray-900 text-white px-5 py-2 rounded-lg transition duration-300 hover:bg-gray-700"
+                  >
+                    Edit Counter
+                  </button>
+                  <button
+                    onClick={() => handleDeleteCounter(counter._id)}
+                    className="bg-red-700 text-white px-5 py-2 rounded-lg transition duration-300 hover:bg-red-600"
+                  >
+                    Delete Counter
+                  </button>
                 </div>
-              </div>
-              <div className="mt-4 md:mt-0 flex space-x-4">
-                <button
-                  onClick={() => handleEditClick(counter)}
-                  className="bg-[#9ba174] text-white px-4 py-2 rounded-md focus:outline-none"
-                >
-                  Edit Counter
-                </button>
-                <button
-                  onClick={() => handleDeleteCounter(counter._id)}
-                  className="bg-[#505e4b] text-white px-4 py-2 rounded-md focus:outline-none"
-                >
-                  Delete Counter
-                </button>
               </div>
             </li>
           ))}
