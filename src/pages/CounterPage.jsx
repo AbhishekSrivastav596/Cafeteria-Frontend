@@ -99,7 +99,7 @@ function CounterPage() {
       <div className="flex justify-between items-center mb-6">
         <button
           onClick={() => setNewCounterForm(true)}
-          className="bg-green-600 text-white px-4 py-2 rounded-md focus:outline-none"
+          className="bg-[#505e4b] text-white px-4 py-2 rounded-md focus:outline-none"
         >
           Add Counter
         </button>
