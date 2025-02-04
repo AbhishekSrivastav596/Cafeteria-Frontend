@@ -37,10 +37,7 @@ const dishSlice = createSlice({
     },
     addDishSuccess:(state,action) => {
       state.loading = false;
-      const newDish = action.payload;
-      state.dishes = state.dishes.map((dish) =>
-        dish._id === newDish._id ? newDish : dish
-      );
+      state.dishes.push(action.payload);
     },
     deleteDishSuccess: (state, action) => {
       state.loading = false;
@@ -84,9 +81,11 @@ export const fetchDishByCounter = (counterId) => async (dispatch) => {
   try{
     const response = await axios.get(`http://localhost:8080/dishes/counter/${counterId}`);
     console.log(response.data);
-    dispatch(fetchDishesSuccess(response.data.dishes));
+    dispatch(fetchDishesSuccess(response.data.dishes || []));
   }catch(err){
-    dispatch(fetchDishesFailure(err.message));
+    console.error(err);
+    dispatch(fetchDishesSuccess([]));
+    
   }
 }
 
