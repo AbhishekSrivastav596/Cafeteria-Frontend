@@ -1,12 +1,11 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchCounters } from "../slices/CounterSlice"; 
-import { useNavigate } from "react-router-dom"; 
+import { fetchCounters } from "../slices/CounterSlice";  
 import { Link } from "react-router-dom";
+import Carousel from "../components/Carousel";
 
 function HomePage() {
   const dispatch = useDispatch();
-  const navigate = useNavigate(); 
   const { counters, loading, error } = useSelector((state) => state.counter);
 
   useEffect(() => {
@@ -30,6 +29,8 @@ function HomePage() {
   }
 
   return (
+    <>
+    <Carousel/>
     <div className="bg-gray-100 min-h-screen py-8 px-4 md:px-16">
       <h1 className="text-center text-3xl font-bold mb-10">Savor the flavors, feel the vibe!</h1>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -61,6 +62,7 @@ function HomePage() {
         )}
       </div>
     </div>
+    </>
   );
 }
 

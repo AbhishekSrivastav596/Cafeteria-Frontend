@@ -5,7 +5,6 @@ import Footer from "./components/Footer";
 import CartPage from "./pages/CartPage";
 import CounterPage from "./pages/CounterPage";
 import DishPage from "./pages/DishPage";
-import Carousel from "./components/Carousel";
 import './index.css'; 
 import HomePage from "./pages/HomePage";
 import { useDispatch, useSelector } from "react-redux";
@@ -25,7 +24,7 @@ function App() {
         <Navbar />
         <main className="flex-grow">
           <Routes>
-            <Route path="/" element={<><Carousel /><HomePage/></>} />
+            <Route path="/" element={<HomePage/>} />
             <Route path="/cart" element={<CartPage />} />
             <Route path="/counters" element={<CounterPage />} />
             <Route path="/dishes" element={<DishPage />} />
