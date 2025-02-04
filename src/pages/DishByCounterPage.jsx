@@ -90,9 +90,9 @@ const DishByCounterPage = () => {
       </div>
 
       {showAddDishForm && (
-        <div className="fixed inset-0 bg-gray-500 bg-opacity-75 flex justify-center items-center z-50">
+        <div className="fixed inset-0 bg-gray-500 bg-opacity-75 flex justify-center items-center z-[9999]">
           <div className="bg-white p-4 rounded-lg shadow-lg w-1/3">
-            <h2 className="text-2xl font-semibold mb-4">Add New Dish</h2>
+            <h2 className="text-2xl font-semibold mb-1 text-center">Add New Dish</h2>
             <DishForm
               dishData={dishData}
               onDishDataChange={setDishData}
@@ -105,9 +105,9 @@ const DishByCounterPage = () => {
       )}
 
       {editingDish && (
-        <div className="fixed inset-0 bg-gray-500 bg-opacity-75 flex justify-center items-center z-50">
+        <div className="fixed inset-0 bg-gray-500 bg-opacity-75 flex justify-center items-center z-[9999]">
           <div className="bg-white p-4 rounded-lg shadow-lg w-1/3">
-            <h2 className="text-2xl font-semibold mb-4">Edit Dish</h2>
+            <h2 className="text-2xl font-semibold mb-1 text-center">Edit Dish</h2>
             <DishForm
               dishData={dishData}
               onDishDataChange={setDishData}
