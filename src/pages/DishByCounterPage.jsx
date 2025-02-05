@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { fetchDishByCounter, editDishes, addNewDish, selectCartDishId, fetchDishesSuccess, deleteDish } from "../slices/DishSlice";
+import {fetchDishByCounter,editDishes,addNewDish,selectCartDishId,fetchDishesSuccess,deleteDish,fetchDishesRequest,} from "../slices/DishSlice";
 import { addTocart } from "../slices/CartSlice";
 import DishForm from "../components/DishForm";
 import DishList from "../components/DishList";
+import DishSkeleton from "../components/DishSkeleton";
 
 const DishByCounterPage = () => {
-  const { counterId } = useParams(); 
+  const { counterId } = useParams();
   const dispatch = useDispatch();
   const { dishes, loading, error } = useSelector((state) => state.dish);
   const cartDishIds = useSelector(selectCartDishId);
-  
+
   const [editingDish, setEditingDish] = useState(null);
   const [showAddDishForm, setShowAddDishForm] = useState(false);
   const [dishData, setDishData] = useState({
@@ -24,10 +25,14 @@ const DishByCounterPage = () => {
   });
 
   useEffect(() => {
-    dispatch(fetchDishByCounter(counterId)); 
-    return () =>{
-     dispatch(fetchDishesSuccess([]));
-    }
+    dispatch(fetchDishesRequest());
+    const timeout = setTimeout(() => {
+      dispatch(fetchDishByCounter(counterId));
+    }, 500);
+    return () => {
+      clearTimeout(timeout);
+      dispatch(fetchDishesSuccess([]));
+    };
   }, [counterId, dispatch]);
 
   const handleAddToCart = (dish) => {
@@ -73,9 +78,7 @@ const DishByCounterPage = () => {
   };
 
   const handleDeleteDish = (dishId) => {
-    if (window.confirm("Are you sure you want to delete this dish?")) {
-      dispatch(deleteDish(dishId));
-    }
+    dispatch(deleteDish(dishId));
   };
 
   return (
@@ -92,7 +95,9 @@ const DishByCounterPage = () => {
       {showAddDishForm && (
         <div className="fixed inset-0 bg-gray-500 bg-opacity-75 flex justify-center items-center z-[9999]">
           <div className="bg-white p-4 rounded-lg shadow-lg w-1/3">
-            <h2 className="text-2xl font-semibold mb-1 text-center">Add New Dish</h2>
+            <h2 className="text-2xl font-semibold mb-1 text-center">
+              Add New Dish
+            </h2>
             <DishForm
               dishData={dishData}
               onDishDataChange={setDishData}
@@ -107,7 +112,9 @@ const DishByCounterPage = () => {
       {editingDish && (
         <div className="fixed inset-0 bg-gray-500 bg-opacity-75 flex justify-center items-center z-[9999]">
           <div className="bg-white p-4 rounded-lg shadow-lg w-1/3">
-            <h2 className="text-2xl font-semibold mb-1 text-center">Edit Dish</h2>
+            <h2 className="text-2xl font-semibold mb-1 text-center">
+              Edit Dish
+            </h2>
             <DishForm
               dishData={dishData}
               onDishDataChange={setDishData}
@@ -120,15 +127,17 @@ const DishByCounterPage = () => {
       )}
 
       {loading ? (
-        <div className="flex justify-center items-center h-screen">
-          <div className="text-xl font-semibold text-gray-500">Loading...</div>
-        </div>
+        <DishSkeleton />
       ) : error ? (
         <div className="flex justify-center items-center h-screen">
-          <div className="text-xl font-semibold text-red-500">Error: {error}</div>
+          <div className="text-xl font-semibold text-red-500">
+            Error: {error}
+          </div>
         </div>
       ) : dishes.length === 0 ? (
-        <div className="text-center text-lg text-gray-500">No dishes available.</div>
+        <div className="text-center text-lg text-gray-500">
+          No dishes available.
+        </div>
       ) : (
         <DishList
           dishes={dishes}

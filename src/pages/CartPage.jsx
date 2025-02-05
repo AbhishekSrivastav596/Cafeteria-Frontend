@@ -6,10 +6,11 @@ import {
   decreaseQuantity,
   clearCart,
 } from "../slices/CartSlice";
+import CartSkeleton from "../components/CartSkeleton";
 
 function CartPage() {
   const dispatch = useDispatch();
-  const { cartItems = [] } = useSelector((state) => state.cart);
+  const { cartItems = [], loading } = useSelector((state) => state.cart);
 
   const handleIncreaseQuantity = (dishId) => {
     dispatch(increaseQuantity(dishId));
@@ -32,6 +33,10 @@ function CartPage() {
     (acc, item) => acc + item.dish.price * item.quantity,
     0
   );
+
+  if (loading) {
+    return <CartSkeleton />;
+  }
 
   if (cartItems.length === 0) {
     return (
