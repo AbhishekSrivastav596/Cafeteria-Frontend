@@ -1,6 +1,6 @@
 import * as React from "react";
-import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -13,9 +13,19 @@ import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
 import cartIcon from "../assets/cart.png";
 import Tooltip from "@mui/material/Tooltip";
-import HomeIcon from "@mui/icons-material/Home";
+import Dialog from "@mui/material/Dialog";
+import DialogTitle from "@mui/material/DialogTitle";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogActions from "@mui/material/DialogActions";
+import { userLogout } from "../slices/authSlice";
 
-const pages = ["Dishes", "Counters"];
+const pages = [
+  { name: "Home", path: "/" },
+  { name: "Dishes", path: "/dishes" },
+  { name: "Counters", path: "/counters" },
+];
+
 const settings = [
   { name: "Profile", path: "/profile" },
   { name: "Login", path: "/login" },
@@ -28,13 +38,17 @@ function Navbar() {
     state.cart.cartItems.reduce((acc, item) => acc + item.quantity, 0)
   );
   const loading = useSelector((state) => state.cart.loading);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const [openLogoutDialog, setOpenLogoutDialog] = React.useState(false);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
+
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
   };
@@ -45,6 +59,20 @@ function Navbar() {
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
+  };
+
+  const handleLogoutClick = () => {
+    setOpenLogoutDialog(true);
+  };
+
+  const handleCloseLogoutDialog = () => {
+    setOpenLogoutDialog(false);
+  };
+
+  const handleConfirmLogout = () => {
+    dispatch(userLogout());
+    navigate("/login");
+    setOpenLogoutDialog(false);
   };
 
   return (
@@ -68,14 +96,25 @@ function Navbar() {
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting) => (
-                <MenuItem key={setting.name} onClick={handleCloseUserMenu}>
+                <MenuItem
+                  key={setting.name}
+                  onClick={
+                    setting.name === "Logout"
+                      ? handleLogoutClick
+                      : handleCloseUserMenu
+                  }
+                >
                   <Typography sx={{ textAlign: "center", color: "black" }}>
-                    <Link
-                      to={setting.path}
-                      style={{ textDecoration: "none", color: "black" }}
-                    >
-                      {setting.name}
-                    </Link>
+                    {setting.name === "Logout" ? (
+                      "Logout"
+                    ) : (
+                      <Link
+                        to={setting.path}
+                        style={{ textDecoration: "none", color: "black" }}
+                      >
+                        {setting.name}
+                      </Link>
+                    )}
                   </Typography>
                 </MenuItem>
               ))}
@@ -83,24 +122,26 @@ function Navbar() {
           </Box>
 
           <Box sx={{ display: "flex", alignItems: "center" }}>
-            <Link to="/" style={{ color: "black" }}>
-              <IconButton sx={{ color: "black" }}>
-                <HomeIcon />
-              </IconButton>
-            </Link>
             {pages.map((page) => (
               <Button
-                key={page}
-                sx={{ my: 2, mr: 1, color: "black", display: "block" }}
+                key={page.name}
+                sx={{
+                  my: 2,
+                  mr: 1,
+                  color: "black",
+                  display: "block",
+                  textTransform: "none",
+                }}
               >
                 <Link
-                  to={`/${page.toLowerCase()}`}
+                  to={page.path}
                   style={{ textDecoration: "none", color: "black" }}
                 >
-                  {page}
+                  {page.name}
                 </Link>
               </Button>
             ))}
+
             <Link to="/cart" style={{ textDecoration: "none", color: "black" }}>
               <Button
                 sx={{
@@ -145,6 +186,22 @@ function Navbar() {
           </Box>
         </Toolbar>
       </Container>
+      <Dialog open={openLogoutDialog} onClose={handleCloseLogoutDialog}>
+        <DialogTitle>Confirm Logout</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            Are you sure you want to logout?
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleCloseLogoutDialog} color="primary">
+            Cancel
+          </Button>
+          <Button onClick={handleConfirmLogout} color="error">
+            Logout
+          </Button>
+        </DialogActions>
+      </Dialog>
     </AppBar>
   );
 }

@@ -11,6 +11,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchCart } from "./slices/CartSlice";
 import DishByCounterPage from "./pages/DishByCounterPage";
 import ScrollToTop from "./components/ScrollToTop";
+import LoginPage from "./pages/LoginPage";
+import SignupPage from "./pages/SignupPage";
+import ProfilePage from "./pages/ProfilePage";
 
 function App() {
   const dispatch = useDispatch();
@@ -24,6 +27,9 @@ function App() {
         <Navbar />
         <main className="flex-grow">
           <Routes>
+          <Route path="/login" element={<LoginPage/>} />
+          <Route path="/signup" element={<SignupPage/>} />
+          <Route path="/profile" element={<ProfilePage/>} />
             <Route path="/" element={<HomePage/>} />
             <Route path="/cart" element={<CartPage />} />
             <Route path="/counters" element={<CounterPage />} />

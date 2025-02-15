@@ -76,7 +76,12 @@ export const {
 export const fetchCounters = () => async (dispatch) => {
   dispatch(fetchCountersRequest());
   try {
-    const response = await axios.get('http://localhost:8080/counters');
+    const token = JSON.parse(localStorage.getItem("token"));
+    const response = await axios.get('http://localhost:8080/counters', {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
     dispatch(fetchCountersSuccess(response.data));
   } catch (error) {
     dispatch(fetchCountersFailure(error.message));
@@ -85,7 +90,12 @@ export const fetchCounters = () => async (dispatch) => {
 
 export const fetchMerchants = () => async (dispatch) => {
   try {
-    const response = await axios.get('http://localhost:8080/users/merchant'); 
+    const token = JSON.parse(localStorage.getItem("token"));
+    const response = await axios.get('http://localhost:8080/users/merchant',{
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }); 
     dispatch(fetchMerchantsSuccess(response.data)); 
     console.log("merchants: ",response.data);
   } catch (err) {
@@ -96,7 +106,12 @@ export const fetchMerchants = () => async (dispatch) => {
 
 export const createCounter = (counterData) => async (dispatch) => {
   try {
-    const response = await axios.post('http://localhost:8080/counters', counterData);
+    const token = JSON.parse(localStorage.getItem("token"));
+    const response = await axios.post('http://localhost:8080/counters', counterData,{
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
     dispatch(createCounterSuccess(response.data.counter));
   } catch (error) {
     console.error('Error creating counter:', error);
@@ -105,7 +120,12 @@ export const createCounter = (counterData) => async (dispatch) => {
 
 export const updateCounter = (counterId, updatedData) => async (dispatch) => {
   try {
-    const response = await axios.put(`http://localhost:8080/counters/${counterId}`, updatedData);
+    const token = JSON.parse(localStorage.getItem("token"));
+    const response = await axios.put(`http://localhost:8080/counters/${counterId}`, updatedData,{
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
     dispatch(updateCounterSuccess(response.data.counter)); 
   } catch (error) {
     console.error('Error updating counter:', error);
@@ -114,7 +134,12 @@ export const updateCounter = (counterId, updatedData) => async (dispatch) => {
 
 export const addMerchant = (counterId, merchantId) => async (dispatch) => {
   try {
-    const response = await axios.put(`http://localhost:8080/counters/${counterId}/merchant/${merchantId}`);
+    const token = JSON.parse(localStorage.getItem("token"));
+    const response = await axios.put(`http://localhost:8080/counters/${counterId}/merchant/${merchantId}`,{
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
     dispatch(addMerchantToCounter({ counterId, merchantId })); 
   } catch (error) {
     console.error('Error adding merchant:', error);
@@ -123,7 +148,12 @@ export const addMerchant = (counterId, merchantId) => async (dispatch) => {
 
 export const removeMerchant = (counterId, merchantId) => async (dispatch) => {
   try {
-    await axios.delete(`http://localhost:8080/counters/${counterId}/merchant/${merchantId}`);
+    const token = JSON.parse(localStorage.getItem("token"));
+    await axios.delete(`http://localhost:8080/counters/${counterId}/merchant/${merchantId}`,{
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
     dispatch(removeMerchantFromCounter({ counterId, merchantId })); 
   } catch (error) {
     console.error('Error removing merchant:', error);
@@ -132,7 +162,12 @@ export const removeMerchant = (counterId, merchantId) => async (dispatch) => {
 
 export const deleteCounterAsync = (counterId) => async (dispatch) => {
   try {
-    await axios.delete(`http://localhost:8080/counters/${counterId}`);
+    const token = JSON.parse(localStorage.getItem("token"));
+    await axios.delete(`http://localhost:8080/counters/${counterId}`,{
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
     dispatch(deleteCounter(counterId));
   } catch (error) {
     console.error('Error deleting counter:', error);
