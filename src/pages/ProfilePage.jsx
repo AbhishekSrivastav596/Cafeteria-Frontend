@@ -1,36 +1,81 @@
 import React from "react";
-import { useSelector } from "react-redux";
-import { Card, CardContent, Typography, Avatar, Button, Box } from "@mui/material";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  Avatar,
+  Card,
+  CardContent,
+  Typography,
+  Button,
+  Box,
+  CardActions,
+} from "@mui/material";
+import { userLogout } from "../slices/authSlice";
+import { useNavigate } from "react-router-dom";
 
-function ProfilePage() {
-  const user = useSelector((state) => state.auth.user); 
+const ProfilePage = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const user = useSelector((state) => state.auth.user);
+
+  const handleLogout = () => {
+    dispatch(userLogout());
+    navigate("/login");
+  };
 
   return (
-    <Box className="flex justify-center items-center min-h-screen bg-gray-100">
-      <Card className="p-6 shadow-lg rounded-2xl w-96 bg-white">
-        <Box className="flex justify-center">
-          <Avatar
-            src={user?.profilePic || "https://via.placeholder.com/100"}
-            alt="Profile"
-            className="w-24 h-24 border-4 border-gray-300"
-          />
-        </Box>
+    <Box className="flex justify-center items-center min-h-screen bg-gray-100 p-4">
+      <Card
+        sx={{ minWidth: 300, maxWidth: 400, borderRadius: 4, boxShadow: 4 }}
+      >
+        <CardContent>
+          <Box display="flex" justifyContent="center" mb={2}>
+            <Avatar
+              src={user?.profilePic || "https://via.placeholder.com/100"}
+              alt="Profile"
+              sx={{
+                width: 80,
+                height: 80,
+                border: "3px solid #ddd",
+                boxShadow: 2,
+              }}
+            />
+          </Box>
 
-        <CardContent className="text-center">
-          <Typography variant="h5" className="font-semibold text-gray-800">
-            {user?.name || "John Doe"}
-          </Typography>
-          <Typography variant="body1" className="text-gray-600">
-            {user?.email || "johndoe@example.com"}
-          </Typography>
-
+          {user?.name && (
+            <Typography
+              variant="h5"
+              component="div"
+              textAlign="center"
+              fontWeight="bold"
+            >
+              {user.name}
+            </Typography>
+          )}
+          {user?.email && (
+            <Typography
+              sx={{ color: "text.secondary", textAlign: "center", mt: 1 }}
+            >
+              {user.email}
+            </Typography>
+          )}
+        </CardContent>
+        <CardActions sx={{ justifyContent: "center", pb: 2 }}>
           <Button
             variant="contained"
-            className="mt-4 bg-blue-500 hover:bg-blue-600 text-white rounded-xl"
+            sx={{
+              bgcolor: "red",
+              color: "white",
+              "&:hover": { bgcolor: "darkred" },
+              px: 3,
+              py: 1,
+              borderRadius: 2,
+              boxShadow: 2,
+            }}
+            onClick={handleLogout}
           >
-            Edit Profile
+            Logout
           </Button>
-        </CardContent>
+        </CardActions>
       </Card>
     </Box>
   );

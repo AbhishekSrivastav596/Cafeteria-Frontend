@@ -105,7 +105,16 @@ function SignupPage() {
             type="submit"
             fullWidth
             variant="contained"
-            sx={{ mt: 2, py: 1.2, fontSize: "16px", backgroundColor: "#1976d2" }}
+            sx={{
+              mt: 2,
+              py: 1.2,
+              fontSize: "16px",
+              backgroundColor: "red",
+              color: "white",
+              "&:hover": { backgroundColor: "darkred" },
+              borderRadius: 2,
+              boxShadow: 2,
+            }}
             disabled={loading}
           >
             {loading ? <CircularProgress size={24} color="inherit" /> : "Sign Up"}

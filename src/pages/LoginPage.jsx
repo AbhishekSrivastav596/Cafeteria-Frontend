@@ -27,13 +27,18 @@ function LoginPage() {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(login(formData));
-    navigate('/dishes')
+    navigate("/dishes");
   };
 
   return (
     <Container
       maxWidth="sm"
-      sx={{ minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center" }}
+      sx={{
+        minHeight: "100vh",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
     >
       <Paper elevation={3} sx={{ p: 4, width: "100%", borderRadius: 3 }}>
         <Typography variant="h4" textAlign="center" gutterBottom>
@@ -69,16 +74,36 @@ function LoginPage() {
             type="submit"
             fullWidth
             variant="contained"
-            sx={{ mt: 2, py: 1.2, fontSize: "16px", backgroundColor: "#1976d2" }}
+            sx={{
+              mt: 2,
+              py: 1.2,
+              fontSize: "16px",
+              backgroundColor: "red",
+              color: "white",
+              "&:hover": { backgroundColor: "darkred" },
+              borderRadius: 2,
+              boxShadow: 2,
+            }}
             disabled={loading}
           >
-            {loading ? <CircularProgress size={24} color="inherit" /> : "Log In"}
+            {loading ? (
+              <CircularProgress size={24} color="inherit" />
+            ) : (
+              "Log In"
+            )}
           </Button>
         </form>
         <Box mt={2} textAlign="center">
           <Typography variant="body2">
             New user?{" "}
-            <Link to="/signup" style={{ color: "#1976d2", textDecoration: "none", fontWeight: "bold" }}>
+            <Link
+              to="/signup"
+              style={{
+                color: "#1976d2",
+                textDecoration: "none",
+                fontWeight: "bold",
+              }}
+            >
               Sign Up
             </Link>
           </Typography>
