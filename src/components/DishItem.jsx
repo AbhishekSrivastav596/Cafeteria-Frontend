@@ -23,6 +23,8 @@ function DishItem({ dish, onAddToCart, onEditDish, isInCart,showCounterName, sho
     </div>
     <div className="mt-4">
         <div className="mt-4 flex justify-between space-x-4">
+        {(user?.role==='merchant') && ( 
+          <>
         {onEditDish && (
           <button
             onClick={onEditDish}
@@ -40,6 +42,8 @@ function DishItem({ dish, onAddToCart, onEditDish, isInCart,showCounterName, sho
             Delete Dish
           </button>
         )}
+        </>
+      )}
       </div>
       {(isCustomer) && ( <button
         onClick={onAddToCart}

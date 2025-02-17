@@ -114,7 +114,7 @@ function CounterPage() {
   return (
     <div className="max-w-6xl mx-auto p-4 mb-10">
       <div className="flex justify-between items-center mb-6">
-        {user.role === 'admin' && (
+        {user?.role === 'admin' && (
           <button
             onClick={() => setNewCounterForm(true)}
             className="bg-[#505e4b] text-white px-4 py-2 rounded-md focus:outline-none"
@@ -214,7 +214,9 @@ function CounterPage() {
                   {counter.description}
                 </p>
                 <div className="mt-5 flex justify-center space-x-4">
-                  <button
+                  {(user?.role==='admin' || user?.role==='merchant') && ( 
+                    <>
+                    <button
                     onClick={() => handleEditClick(counter)}
                     className="bg-gray-900 text-white px-5 py-2 rounded-lg transition duration-300 hover:bg-gray-700"
                   >
@@ -226,6 +228,8 @@ function CounterPage() {
                   >
                     Delete Counter
                   </button>
+                  </> 
+                  )}
                 </div>
               </div>
             </li>
@@ -260,7 +264,7 @@ function CounterPage() {
               placeholder="Description"
             />
            
-            {user.role === "admin" && (
+            {user?.role === "admin" && (
               <div>
                 <h3 className="text-lg font-semibold mt-2 mb-2">Assign Merchants</h3>
                 <div className="max-h-40 overflow-y-auto">
