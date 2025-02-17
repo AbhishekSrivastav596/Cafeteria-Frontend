@@ -7,6 +7,7 @@ import DishSkeleton from "../components/DishSkeleton";
 function CounterPage() {
   const dispatch = useDispatch();
   const { counters, loading, error, merchants } = useSelector((state) => state.counter);
+  const { user } = useSelector((state) => state.auth);
   const [editCounter, setEditCounter] = useState(null);
   const [formData, setFormData] = useState({
     name: "",
@@ -21,6 +22,8 @@ function CounterPage() {
     description: "",
     merchants: [],
   });
+
+
 
   useEffect(() => {
     dispatch(fetchCountersRequest());
@@ -84,6 +87,12 @@ function CounterPage() {
 
   const handleAddNewCounter = () => {
     dispatch(createCounter(newCounterData));
+    setNewCounterData({
+      name: "",
+      imageUrl: "",
+      description: "",
+      merchants: [],
+    });
     setNewCounterForm(false);
   };
 
@@ -105,18 +114,18 @@ function CounterPage() {
   return (
     <div className="max-w-6xl mx-auto p-4 mb-10">
       <div className="flex justify-between items-center mb-6">
-        <button
-          onClick={() => setNewCounterForm(true)}
-          className="bg-[#505e4b] text-white px-4 py-2 rounded-md focus:outline-none"
-        >
-          Add Counter
-        </button>
+        {user.role === 'admin' && (
+          <button
+            onClick={() => setNewCounterForm(true)}
+            className="bg-[#505e4b] text-white px-4 py-2 rounded-md focus:outline-none"
+          >
+            Add Counter
+          </button>
+        )}
       </div>
-
       {newCounterForm && (
         <div className="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center">
           <div className="bg-white p-6 rounded-lg shadow-md w-96">
-            <h2 className="text-xl font-bold mb-4">Add New Counter</h2>
             <input
               type="text"
               name="name"
@@ -227,7 +236,6 @@ function CounterPage() {
       {editCounter && (
         <div className="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center">
           <div className="bg-white p-6 rounded-lg shadow-md w-96">
-            <h2 className="text-xl font-bold mb-4">Edit Counter</h2>
             <input
               type="text"
               name="name"
@@ -251,24 +259,24 @@ function CounterPage() {
               className="w-full p-2 border rounded mb-2"
               placeholder="Description"
             />
-            <h3 className="text-lg font-semibold mt-2 mb-2">
-              Assign Merchants
-            </h3>
-            <div className="max-h-40 overflow-y-auto">
-              {merchants.map((merchant) => (
-                <label
-                  key={merchant._id}
-                  className="flex items-center space-x-2 mb-1"
-                >
-                  <input
-                    type="checkbox"
-                    checked={formData.merchants.includes(merchant._id)}
-                    onChange={() => handleMerchantToggle(merchant._id)}
-                  />
-                  <span>{merchant.name}</span>
-                </label>
-              ))}
-            </div>
+           
+            {user.role === "admin" && (
+              <div>
+                <h3 className="text-lg font-semibold mt-2 mb-2">Assign Merchants</h3>
+                <div className="max-h-40 overflow-y-auto">
+                  {merchants.map((merchant) => (
+                    <label key={merchant._id} className="flex items-center space-x-2 mb-1">
+                      <input
+                        type="checkbox"
+                        checked={formData.merchants.includes(merchant._id)}
+                        onChange={() => handleMerchantToggle(merchant._id)}
+                      />
+                      <span>{merchant.name}</span>
+                    </label>
+                  ))}
+                </div>
+              </div>
+            )}
             <div className="flex justify-end space-x-3 mt-4">
               <button
                 onClick={() => setEditCounter(null)}
