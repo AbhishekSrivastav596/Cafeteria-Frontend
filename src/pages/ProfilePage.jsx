@@ -58,6 +58,13 @@ const ProfilePage = () => {
               {user.email}
             </Typography>
           )}
+          {user?.role && (
+            <Typography
+            sx={{ color: "text.secondary", textAlign: "center", mt: 1, fontWeight:"bold"}}
+          >
+            {user.role}
+          </Typography>
+          )}
         </CardContent>
         <CardActions sx={{ justifyContent: "center", pb: 2 }}>
           <Button
