@@ -8,7 +8,7 @@ import DishPage from "./pages/DishPage";
 import './index.css'; 
 import HomePage from "./pages/HomePage";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchCart } from "./slices/CartSlice";
+import { fetchCart, setCartLoading } from "./slices/CartSlice";
 import DishByCounterPage from "./pages/DishByCounterPage";
 import ScrollToTop from "./components/ScrollToTop";
 import LoginPage from "./pages/LoginPage";
@@ -17,9 +17,12 @@ import ProfilePage from "./pages/ProfilePage";
 
 function App() {
   const dispatch = useDispatch();
+  const user = useSelector((state)=> state.auth);
   useEffect(() => {
-    dispatch(fetchCart());
-  }, [dispatch]);
+    if(user){
+      dispatch(fetchCart());
+    }
+  }, [dispatch,user]);
   
   return (
     <Router>

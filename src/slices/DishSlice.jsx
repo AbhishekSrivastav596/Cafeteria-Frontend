@@ -21,7 +21,6 @@ const dishSlice = createSlice({
     },
     fetchDishesFailure: (state, action) => {
       state.loading = false;
-      state.error = action.payload;
     },
     addToCartSuccess: (state, action) => {
       state.loading = false;
@@ -74,7 +73,8 @@ export const fetchDishes = () => async (dispatch) => {
     console.log(response.data);
     dispatch(fetchDishesSuccess(response.data.dishes));
   } catch (error) {
-    dispatch(fetchDishesFailure(error.message));
+    console.error("Error fetching dish:",err);
+    dispatch(fetchDishesFailure());
   }
 };
 
@@ -106,9 +106,9 @@ export const editDishes = (dishId, updatedDishData) => async (dispatch) => {
     });
     console.log("Dish updated successfully:", response.data);
     dispatch(editDishSuccess(response.data.updatedDish));
-  } catch (error) {
-    console.error("Failed to edit dish:", error.message);
-    dispatch(fetchDishesFailure(error.message));
+  } catch (err) {
+    console.error("Failed to edit dish:", err);
+    dispatch(fetchDishesFailure());
   }
 };
 
@@ -123,8 +123,8 @@ export const addNewDish = (newDish) => async (dispatch) => {
     });
     dispatch(addDishSuccess(response.data.newDish));
   } catch (err) {
-    console.log("Error adding new dish:", err.message);
-    dispatch(fetchDishesFailure(err.message));
+    console.error("Error adding new dish:", err);
+    dispatch(fetchDishesFailure());
   }
 };
 
@@ -139,7 +139,8 @@ export const deleteDish = (dishId) => async (dispatch) => {
     });
     dispatch(deleteDishSuccess(dishId));
   } catch (error) {
-    dispatch(fetchDishesFailure(error.message));
+    console.error("Error deleting dish:",err);
+    dispatch(fetchDishesFailure());
   }
 };
 

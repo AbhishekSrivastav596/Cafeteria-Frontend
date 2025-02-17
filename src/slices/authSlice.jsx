@@ -1,8 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import { clearCartSuccess } from "./CartSlice";
+import { fetchDishes } from "./DishSlice";
+import { fetchCounters } from "./CounterSlice";
 
 const initialState = {
-  user: null,
+  user: JSON.parse(localStorage.getItem("user")) || null,
   loading: false,
   error: null,
 };
@@ -19,6 +22,7 @@ const authSlice = createSlice({
       state.loading = false;
       state.user = action.payload.user;
       localStorage.setItem("token", JSON.stringify(action.payload.token));
+      localStorage.setItem("user", JSON.stringify(action.payload.user));
     },
     authFailure: (state, action) => {
       state.loading = false;
@@ -27,6 +31,7 @@ const authSlice = createSlice({
     logout: (state) => {
       state.user = null;
       localStorage.removeItem("token");
+      localStorage.removeItem("user");
     },
   },
 });
@@ -42,6 +47,8 @@ export const login = (credentials) => async (dispatch) => {
     dispatch(
       authSuccess({ user: response.data.user, token: response.data.token })
     );
+    dispatch(fetchDishes());
+    dispatch(fetchCounters());
   } catch (error) {
     dispatch(authFailure(error.response?.data?.message || "Login failed"));
   }
@@ -61,6 +68,7 @@ export const signup = (userData) => async (dispatch) => {
 
 export const userLogout = () => (dispatch) => {
   dispatch(logout());
+  dispatch(clearCartSuccess());
 };
 
 export default authSlice.reducer;
