@@ -67,7 +67,7 @@ const ProfilePage = () => {
           )}
         </CardContent>
         <CardActions sx={{ justifyContent: "center", pb: 2 }}>
-          <Button
+          {(user) && (<Button
             variant="contained"
             sx={{
               bgcolor: "red",
@@ -81,7 +81,7 @@ const ProfilePage = () => {
             onClick={handleLogout}
           >
             Logout
-          </Button>
+          </Button>)}
         </CardActions>
       </Card>
     </Box>
