@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchCounters } from "../slices/CounterSlice";  
 import { Link } from "react-router-dom";
 import Carousel from "../components/Carousel";
+import DishSkeleton from "../components/DishSkeleton";
 
 function HomePage() {
   const dispatch = useDispatch();
@@ -13,11 +14,7 @@ function HomePage() {
   }, [dispatch]);
 
   if (loading) {
-    return (
-      <div className="flex justify-center items-center h-screen">
-        <div className="text-xl font-semibold text-gray-500">Loading...</div>
-      </div>
-    );
+    return <DishSkeleton />;
   }
 
   if (error) {
