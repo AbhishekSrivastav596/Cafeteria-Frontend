@@ -77,7 +77,7 @@ export const fetchCounters = () => async (dispatch) => {
   dispatch(fetchCountersRequest());
   try {
     const token = JSON.parse(localStorage.getItem("token"));
-    const response = await axios.get('http://localhost:8080/counters', {
+    const response = await axios.get('https://cafeteria-backend-0m45.onrender.com/counters', {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -91,7 +91,7 @@ export const fetchCounters = () => async (dispatch) => {
 export const fetchMerchants = () => async (dispatch) => {
   try {
     const token = JSON.parse(localStorage.getItem("token"));
-    const response = await axios.get('http://localhost:8080/users/merchant',{
+    const response = await axios.get('https://cafeteria-backend-0m45.onrender.com/users/merchant',{
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -107,7 +107,7 @@ export const fetchMerchants = () => async (dispatch) => {
 export const createCounter = (counterData) => async (dispatch) => {
   try {
     const token = JSON.parse(localStorage.getItem("token"));
-    const response = await axios.post('http://localhost:8080/counters', counterData,{
+    const response = await axios.post('https://cafeteria-backend-0m45.onrender.com/counters', counterData,{
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -121,7 +121,7 @@ export const createCounter = (counterData) => async (dispatch) => {
 export const updateCounter = (counterId, updatedData) => async (dispatch) => {
   try {
     const token = JSON.parse(localStorage.getItem("token"));
-    const response = await axios.put(`http://localhost:8080/counters/${counterId}`, updatedData,{
+    const response = await axios.put(`https://cafeteria-backend-0m45.onrender.com/counters/${counterId}`, updatedData,{
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -135,7 +135,7 @@ export const updateCounter = (counterId, updatedData) => async (dispatch) => {
 export const addMerchant = (counterId, merchantId) => async (dispatch) => {
   try {
     const token = JSON.parse(localStorage.getItem("token"));
-    const response = await axios.put(`http://localhost:8080/counters/${counterId}/merchant/${merchantId}`,{
+    const response = await axios.put(`https://cafeteria-backend-0m45.onrender.com/counters/${counterId}/merchant/${merchantId}`,{
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -149,7 +149,7 @@ export const addMerchant = (counterId, merchantId) => async (dispatch) => {
 export const removeMerchant = (counterId, merchantId) => async (dispatch) => {
   try {
     const token = JSON.parse(localStorage.getItem("token"));
-    await axios.delete(`http://localhost:8080/counters/${counterId}/merchant/${merchantId}`,{
+    await axios.delete(`https://cafeteria-backend-0m45.onrender.com/counters/${counterId}/merchant/${merchantId}`,{
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -163,7 +163,7 @@ export const removeMerchant = (counterId, merchantId) => async (dispatch) => {
 export const deleteCounterAsync = (counterId) => async (dispatch) => {
   try {
     const token = JSON.parse(localStorage.getItem("token"));
-    await axios.delete(`http://localhost:8080/counters/${counterId}`,{
+    await axios.delete(`https://cafeteria-backend-0m45.onrender.com/counters/${counterId}`,{
       headers: {
         Authorization: `Bearer ${token}`,
       },

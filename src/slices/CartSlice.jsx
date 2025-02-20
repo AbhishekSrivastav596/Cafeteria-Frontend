@@ -29,7 +29,7 @@ export const fetchCart = () => async (dispatch) => {
   dispatch(setCartLoading(true));
   try {
     const token = JSON.parse(localStorage.getItem("token"));
-    const response = await axios.get("http://localhost:8080/cart", {
+    const response = await axios.get("https://cafeteria-backend-0m45.onrender.com/cart", {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -45,7 +45,7 @@ export const removeFromCart = (dishId) => async (dispatch) => {
   try {
     const token = JSON.parse(localStorage.getItem("token"));
     const response = await axios.delete(
-      `http://localhost:8080/cart/remove/${dishId}`,
+      `https://cafeteria-backend-0m45.onrender.com/cart/remove/${dishId}`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -63,7 +63,7 @@ export const increaseQuantity = (dishId) => async (dispatch) => {
   try {
     const token = JSON.parse(localStorage.getItem("token"));
     const response = await axios.patch(
-      `http://localhost:8080/cart/${dishId}`,
+      `https://cafeteria-backend-0m45.onrender.com/cart/${dishId}`,
       { changeQuantity: 1 },
       {
         headers: {
@@ -82,7 +82,7 @@ export const decreaseQuantity = (dishId) => async (dispatch) => {
   try {
     const token = JSON.parse(localStorage.getItem("token"));
     const response = await axios.patch(
-      `http://localhost:8080/cart/${dishId}`,
+      `https://cafeteria-backend-0m45.onrender.com/cart/${dishId}`,
       { changeQuantity: -1 },
       {
         headers: {
@@ -100,7 +100,7 @@ export const clearCart = (userId) => async (dispatch) => {
   try {
     const token = JSON.parse(localStorage.getItem("token"));
     await axios.delete(
-      `http://localhost:8080/cart/clear/${userId}`,
+      `https://cafeteria-backend-0m45.onrender.com/cart/clear/${userId}`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -118,7 +118,7 @@ export const addTocart = (dishId, quantity) => async (dispatch) => {
   try {
     const token = JSON.parse(localStorage.getItem("token"));
     const response = await axios.post(
-      "http://localhost:8080/cart/add",
+      "https://cafeteria-backend-0m45.onrender.com/cart/add",
       { dishId, quantity },
       {
         headers: {

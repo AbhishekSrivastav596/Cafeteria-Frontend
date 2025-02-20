@@ -65,7 +65,7 @@ export const fetchDishes = () => async (dispatch) => {
   try {
     const token = JSON.parse(localStorage.getItem("token"));
     console.log(token);
-    const response = await axios.get("http://localhost:8080/dishes", {
+    const response = await axios.get("https://cafeteria-backend-0m45.onrender.com/dishes", {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -82,7 +82,7 @@ export const fetchDishByCounter = (counterId) => async (dispatch) => {
   dispatch(fetchDishesRequest());
   try {
     const token = JSON.parse(localStorage.getItem("token"));
-    const response = await axios.get(`http://localhost:8080/dishes/counter/${counterId}`,{
+    const response = await axios.get(`https://cafeteria-backend-0m45.onrender.com/dishes/counter/${counterId}`,{
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -99,7 +99,7 @@ export const editDishes = (dishId, updatedDishData) => async (dispatch) => {
   dispatch(fetchDishesRequest());
   try {
     const token = JSON.parse(localStorage.getItem("token"));
-    const response = await axios.patch(`http://localhost:8080/dishes/${dishId}`,updatedDishData,{
+    const response = await axios.patch(`https://cafeteria-backend-0m45.onrender.com/dishes/${dishId}`,updatedDishData,{
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -116,7 +116,7 @@ export const addNewDish = (newDish) => async (dispatch) => {
   dispatch(fetchDishesRequest());
   try {
     const token = JSON.parse(localStorage.getItem("token"));
-    const response = await axios.post("http://localhost:8080/dishes/", newDish,{
+    const response = await axios.post("https://cafeteria-backend-0m45.onrender.com/dishes/", newDish,{
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -132,7 +132,7 @@ export const deleteDish = (dishId) => async (dispatch) => {
   dispatch(fetchDishesRequest());
   try {
     const token = JSON.parse(localStorage.getItem("token"));
-    const response = await axios.delete(`http://localhost:8080/dishes/${dishId}`,{
+    const response = await axios.delete(`https://cafeteria-backend-0m45.onrender.com/dishes/${dishId}`,{
       headers: {
         Authorization: `Bearer ${token}`,
       },

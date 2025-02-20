@@ -42,7 +42,7 @@ export const { authRequest, authSuccess, authFailure, logout } =
 export const login = (credentials) => async (dispatch) => {
   dispatch(authRequest());
   try {
-    const response = await axios.post("http://localhost:8080/auth/login",credentials);
+    const response = await axios.post("https://cafeteria-backend-0m45.onrender.com/auth/login",credentials);
     console.log(response.data);
     dispatch(
       authSuccess({ user: response.data.user, token: response.data.token })
@@ -57,7 +57,7 @@ export const login = (credentials) => async (dispatch) => {
 export const signup = (userData) => async (dispatch) => {
   dispatch(authRequest());
   try {
-    const response = await axios.post("http://localhost:8080/auth/signup",userData);
+    const response = await axios.post("https://cafeteria-backend-0m45.onrender.com/auth/signup",userData);
     dispatch(
       authSuccess({ user: response.data.user, token: response.data.token })
     );
