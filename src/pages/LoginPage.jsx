@@ -12,6 +12,7 @@ import {
   CircularProgress,
   Grid,
 } from "@mui/material";
+import { useEffect } from "react";
 
 function LoginPage() {
   const [formData, setFormData] = useState({ email: "", password: "" });
