@@ -4,23 +4,33 @@ import {fetchDishes,fetchDishesRequest,fetchDishesSuccess,selectCartDishId,} fro
 import { addTocart } from "../slices/CartSlice";
 import DishList from "../components/DishList";
 import DishSkeleton from "../components/DishSkeleton";
+import { toast } from "react-toastify";
+
 
 function DishPage() {
   const dispatch = useDispatch();
   const { dishes, loading, error } = useSelector((state) => state.dish);
   const cartDishIds = useSelector(selectCartDishId);
+  const user = useSelector((state) => state.auth.user);
 
   useEffect(() => {
     dispatch(fetchDishesRequest());
     const timeout = setTimeout(() => {
       dispatch(fetchDishes());
     }, 500);
-
+     let toastInterval;
+        if (!user) {
+          toast.info("Please login to add dishes in cart");
+          toastInterval = setInterval(() => {
+            toast.info("Please login to add dishes in cart");
+          }, 10000); 
+        }
     return () => {
+      if (toastInterval) clearInterval(toastInterval);
       clearTimeout(timeout);
       dispatch(fetchDishesSuccess([]));
     };
-  }, [dispatch]);
+  }, [dispatch,user]);
 
   const handleAddToCart = (dish) => {
     dispatch(addTocart(dish._id, 1));
