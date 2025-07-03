@@ -3,7 +3,6 @@ import { useSelector } from "react-redux";
 
 function DishItem({ dish, onAddToCart, onEditDish, isInCart,showCounterName, showDeleteButton, onDeleteDish }){
   const user = useSelector((state) => state.auth.user);
-  const isCustomer = user?.role === "customer";
   return (
     <li className="relative bg-white p-6 rounded-2xl shadow-md hover:shadow-xl transition duration-300 hover:scale-105 border border-gray-800 flex flex-col overflow-hidden">
     <div className="flex flex-col items-center">
@@ -45,7 +44,7 @@ function DishItem({ dish, onAddToCart, onEditDish, isInCart,showCounterName, sho
         </>
       )}
       </div>
-      {(isCustomer) && ( <button
+      {(!user || user?.role === "customer") && ( <button
         onClick={onAddToCart}
         className={`w-full mt-4 ${isInCart ? "bg-gray-400" : "bg-[#505e4b]"} text-white py-2 rounded-md`}
         disabled={isInCart}

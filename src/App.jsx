@@ -14,8 +14,7 @@ import ScrollToTop from "./components/ScrollToTop";
 import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
 import ProfilePage from "./pages/ProfilePage";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+
 
 
 function App() {
@@ -46,7 +45,6 @@ function App() {
         <Footer />
        <ScrollToTop/>
 
-       <ToastContainer position="top-center" autoClose={3000} />
       </div>
     </Router>
   );

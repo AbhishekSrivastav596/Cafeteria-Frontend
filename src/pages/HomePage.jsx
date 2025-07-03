@@ -4,27 +4,16 @@ import { fetchCounters } from "../slices/CounterSlice";
 import { Link } from "react-router-dom";
 import Carousel from "../components/Carousel";
 import DishSkeleton from "../components/DishSkeleton";
-import { toast } from "react-toastify";
 
 
 function HomePage() {
   const dispatch = useDispatch();
   const { counters, loading, error } = useSelector((state) => state.counter);
-  const user = useSelector((state) => state.auth.user);
 
   useEffect(() => {
     dispatch(fetchCounters());
-    let toastInterval;
-    if (!user) {
-      toast.info("Please login to add dishes in cart");
-      toastInterval = setInterval(() => {
-        toast.info("Please login to add dishes in cart");
-      }, 10000); 
-    }
-    return () => {
-      if (toastInterval) clearInterval(toastInterval);
-    };
-  }, [dispatch, user]);
+  
+  }, [dispatch]);
 
   if (loading) {
     return <DishSkeleton />;
